@@ -1,21 +1,21 @@
 package com.jjang051.di.annotation;
 import javax.inject.Inject;
 import javax.inject.Named;
-import org.springframework.beans.factory.annotation.Qualifier;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
+
+@Service
 public class OrderManager {
 
     @Inject
-    @Named("hyundai")
+    @Named("kia")
     private CarMaker maker;
-    /*
-    public OrderManager() {
-        //maker = new KiaMaker();
-        maker = new HyundaiMaker();
-    }
-     */
-    public OrderManager(@Qualifier("hyundai") CarMaker maker) {
 
+    @Autowired
+    public OrderManager(@Qualifier("kia") CarMaker maker) {
+        this.maker = maker;
     }
     public void setMaker(CarMaker maker) {
         this.maker = maker;
