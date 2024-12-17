@@ -8,16 +8,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
 @Controller
 public class MemberController {
-
     @GetMapping("/member/login")
     public String login(Model model) {
         model.addAttribute("member", new Member());
         return "member/login";
     }
-
     /*
     @PostMapping("/member/login")
     public String login(HttpServletRequest request) {
