@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: request
+  devtools:
+    restart:
+      enabled: true
+    livereload:
+      enabled: true
+server:
+  port: 8080
+
