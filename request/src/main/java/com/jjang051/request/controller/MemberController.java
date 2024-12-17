@@ -13,7 +13,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class MemberController {
 
     @GetMapping("/member/login")
-    public String login() {
+    public String login(Model model) {
+        model.addAttribute("member", new Member());
         return "member/login";
     }
 
@@ -38,11 +39,10 @@ public class MemberController {
     }
      */
     @PostMapping("/member/login")
-    public String login(@ModelAttribute Member member, Model model) {
+    public String login(@ModelAttribute Member member) {
         if(member.getUserId().equals("jjang051") && member.getUserPw().equals("1234")) {
             return "redirect:/index/index";
         }
-        model.addAttribute("member", member);
         return "member/login";
     }
 

@@ -1,14 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
-  <form action="/member/login" method="post">
-    <input type="text" name="userId">
-    <input type="text" name="userPw">
-    <button>로그인</button>
-  </form>
+<form action="/member/login" method="post">
+    <input type="text" name="userId" value="jjang051" th:value="${member.userId}">
+    <input type="password" name="userPw" value="1234" th:value="${member.userPw}">
+    <button>로그인</button>jjang051
+</form>
+<!-- elvis operator-->
+<div th:text="${member?.userId}">hong</div>
+<div th:text="${member?.userPw}">1234</div>
+
 </body>
 </html>
