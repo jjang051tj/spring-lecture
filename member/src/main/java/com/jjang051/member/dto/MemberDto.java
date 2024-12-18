@@ -18,6 +18,8 @@ public class MemberDto {
     private int zipcode;
     private String address;
     private String regDate;
+    private String addr01;
+    private String addr02;
     private String originalProfile;
     private String renameProfile;
 }
