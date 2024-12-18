@@ -3,6 +3,7 @@ package com.jjang051.member.controller;
 import com.jjang051.member.dto.MemberDto;
 import com.jjang051.member.service.MemberService;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -48,9 +49,18 @@ public class MemberController {
     }
 
     @PostMapping("/login")
-    public String login(@ModelAttribute MemberDto memberDto) {
+    public String login(@ModelAttribute MemberDto memberDto, HttpSession session) {
         MemberDto loggedMemberDto =  memberService.login(memberDto);
+        if(loggedMemberDto!=null) {
+            session.setAttribute("loggedMemberDto", loggedMemberDto);
+        }
         System.out.println("loggedMemberDto : " + loggedMemberDto.toString());
+        return "redirect:/index/index";
+    }
+    @GetMapping("/logout")
+    public String logout(HttpSession session) {
+        session.removeAttribute("loggedMemberDto");
+        session.invalidate();
         return "redirect:/index/index";
     }
 
