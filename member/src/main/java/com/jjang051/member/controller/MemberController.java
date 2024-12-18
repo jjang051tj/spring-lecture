@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 //Bean으로 등록
+@RequestMapping("/member")
 @Controller
 @RequiredArgsConstructor
 public class MemberController {
@@ -25,13 +26,13 @@ public class MemberController {
 //        this.memberService = memberService;
 //    }
 
-    @GetMapping("/member/signup")
+    @GetMapping("/signup")
     public String signup() {
         return "member/signup";
     }
 
-    @PostMapping("/member/signup")
-    @ResponseBody
+    @PostMapping("/signup")
+    //@ResponseBody
     public String signup(@ModelAttribute MemberDto memberDto) {
         //System.out.println(memberDto.toString());
         int result = memberService.signup(memberDto);
@@ -39,7 +40,18 @@ public class MemberController {
         if(result>0) {
             return "redirect:/index/index";
         }
-        return "member/signup";
+        return "/member/signup";
+    }
+    @GetMapping("/login")
+    public String login() {
+        return "/member/login";
+    }
+
+    @PostMapping("/login")
+    public String login(@ModelAttribute MemberDto memberDto) {
+        MemberDto loggedMemberDto =  memberService.login(memberDto);
+        System.out.println("loggedMemberDto : " + loggedMemberDto.toString());
+        return "redirect:/index/index";
     }
 
 }

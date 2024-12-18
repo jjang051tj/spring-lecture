@@ -22,4 +22,8 @@ public class MemberService {
         memberDto.setRenameProfile("");
         return memberDao.signUp(memberDto);
     }
+
+    public MemberDto login(MemberDto memberDto) {
+        return memberDao.login(memberDto);
+    }
 }

@@ -4,6 +4,6 @@
         "https://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
     <typeAliases>
-        <typeAlias alias="MemberDto" type="com.jjang051.member.dto.MemberDto"></typeAlias>
+<!--        <typeAlias alias="MemberDto" type="com.jjang051.member.dto.MemberDto"></typeAlias>-->
     </typeAliases>
 </configuration>

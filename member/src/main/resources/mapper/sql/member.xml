@@ -19,7 +19,7 @@
         sysdate
         )
     </insert>
-    <select id="loginMember" parameterType="MemberDto" resultType="MemberDto">
+    <select id="login" parameterType="MemberDto" resultType="MemberDto">
         select * from member where userId=#{userId} and userPw=#{userPw}
     </select>
     <select id="loginMemberString" parameterType="String" resultType="MemberDto">
