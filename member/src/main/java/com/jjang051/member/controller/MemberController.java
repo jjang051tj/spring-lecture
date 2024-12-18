@@ -1,13 +1,16 @@
 package com.jjang051.member.controller;
 
 import com.jjang051.member.dto.MemberDto;
+import com.jjang051.member.dto.ModalDto;
 import com.jjang051.member.service.MemberService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -52,13 +55,23 @@ public class MemberController {
     }
 
     @PostMapping("/login")
-    public String login(@ModelAttribute MemberDto memberDto, HttpSession session) {
+    public String login(@ModelAttribute MemberDto memberDto,
+                        HttpSession session,
+                        RedirectAttributes redirectAttributes) {
         MemberDto loggedMemberDto =  memberService.login(memberDto);
         if(loggedMemberDto!=null) {
             session.setAttribute("loggedMemberDto", loggedMemberDto);
+            ModalDto modalDto = ModalDto.builder()
+                                        .isShow(true)
+                                        .title("로그인")
+                                        .content(loggedMemberDto.getUserName()+"님 로그인되었습니다")
+                                        .build();
+            redirectAttributes.addFlashAttribute("modalDto", modalDto);
+            return "redirect:/index/index";
         }
         System.out.println("loggedMemberDto : " + loggedMemberDto.toString());
-        return "redirect:/index/index";
+        return "/member/login";
+
     }
     @GetMapping("/logout")
     public String logout(HttpSession session) {
