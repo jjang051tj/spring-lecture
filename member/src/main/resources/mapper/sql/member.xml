@@ -25,7 +25,7 @@
     <select id="loginMemberString" parameterType="String" resultType="MemberDto">
         select * from member where userId=#{value}
     </select>
-    <select id="idCheck" parameterType="String" resultType="int">
-        select count(*) as count from member where userId=#{value}
-    </select>
+<!--    <select id="idCheck" parameterType="String" resultType="int">-->
+<!--        select count(*) as count from member where userId=#{value}-->
+<!--    </select>-->
 </mapper>

@@ -26,4 +26,8 @@ public class MemberService {
     public MemberDto login(MemberDto memberDto) {
         return memberDao.login(memberDto);
     }
+
+    public int idCheck(String userId) {
+        return memberDao.idCheck(userId);
+    }
 }

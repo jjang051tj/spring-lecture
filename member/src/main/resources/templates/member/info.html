@@ -1,0 +1,46 @@
+<html xmlns:th="http://thymeleaf.org">
+<head th:replace="~{fragments/head::myHead('INFO')}"></head>
+<body>
+<div class="container">
+  <header th:replace="~{fragments/header}"></header>
+  <main>
+    <h2 class="mt-5 mb-5">MY PAGE</h2>
+    <table class="table">
+      <colgroup>
+        <col style="width:150px">
+        <col>
+      </colgroup>
+      <tbody>
+        <tr>
+          <th>USER ID</th>
+          <td th:text="${infoMember.userId}">jjang051</td>
+        </tr>
+        <tr>
+          <th>USER NAME</th>
+          <td th:text="${infoMember.userId}">jjang051</td>
+        </tr>
+        <tr>
+          <th>USER EMAIL</th>
+          <td th:text="${infoMember.userEmail}">jjang051</td>
+        </tr>
+        <tr>
+          <th>ADDRESS</th>
+          <td th:text="${infoMember.address}">jjang051</td>
+        </tr>
+        <tr>
+          <th>REGDATE</th>
+          <td th:text="${infoMember.regDate}">jjang051</td>
+        </tr>
+        <tr>
+          <th>TEL</th>
+          <td th:text="${infoMember.tel}">jjang051</td>
+        </tr>
+      </tbody>
+    </table>
+
+  </main>
+  <footer th:replace="~{fragments/footer}"></footer>
+</div>
+</body>
+</html>
+

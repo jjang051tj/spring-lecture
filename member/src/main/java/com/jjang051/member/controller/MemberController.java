@@ -9,6 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+import java.util.Map;
+
 //Bean으로 등록
 @RequestMapping("/member")
 @Controller
@@ -64,4 +67,12 @@ public class MemberController {
         return "redirect:/index/index";
     }
 
+    @GetMapping("/id-check")
+    @ResponseBody
+    public Map<String,Integer> idCheck(@RequestParam String userId) {
+        int count = memberService.idCheck(userId);
+        Map<String,Integer> map = new HashMap<>();
+        map.put("count",count);
+        return map;
+    }
 }
