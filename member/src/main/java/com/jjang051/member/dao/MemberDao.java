@@ -1,7 +1,11 @@
 package com.jjang051.member.dao;
 
+import com.jjang051.member.dto.MemberDto;
+import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
 
-public class MemberDao {
+@Mapper
+public interface MemberDao {
+    int signUp(MemberDto memberDto);
 }
