@@ -74,7 +74,7 @@
     const btnDeleteAjax=document.querySelector("#btn-delete-ajax");
     const btnSend= document.querySelector("#btn-send");
     const userPw= document.querySelector("#userPw");
-    const loggedMemberUserId = [[ ${session?.loggedMemberDto?.userId} ]];
+    let loggedMemberUserId = /*[[ ${session?.loggedMemberDto?.userId} ]]*/ "test";
     console.log("loggedMemberUserId==="+loggedMemberUserId);
     //$("#btn-delete-ajax").on()
     btnDeleteAjax.addEventListener("click",()=>{
