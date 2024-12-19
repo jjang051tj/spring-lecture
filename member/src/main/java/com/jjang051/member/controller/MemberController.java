@@ -131,4 +131,19 @@ public class MemberController {
         return "/member/delete";
     }
 
+    @DeleteMapping("/delete/{userId}")
+    @ResponseBody
+    public Map<String,String> deletAjax(@PathVariable String userId,
+                         @RequestParam("userPw") String userPw
+    ) {
+        int result = memberService.deleteMember(userId,userPw);
+        Map<String,String> map = new HashMap<>();
+        if(result>0) {
+            map.put("delete","success");
+        }else {
+            map.put("delete","fail");
+        }
+        return map;
+    }
+
 }

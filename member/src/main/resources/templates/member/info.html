@@ -39,11 +39,61 @@
     </table>
     <div class="mt-5 d-flex justify-content-center gutter-1">
       <a href="/member/delete/jjang051" class="btn btn-primary">DELETE</a>
-      <button class="btn btn-primary">DELETE AJAX</button>
+      <button class="btn btn-primary mx-1" id="btn-delete-ajax">DELETE AJAX</button>
       <a href="/member/modify" class="btn btn-primary">MODIFY</a>
     </div>
   </main>
   <footer th:replace="~{fragments/footer}"></footer>
+
+  <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">회원탈퇴</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form action="../member/delete" method="post">
+            <div class="form-floating mt-2">
+              <input type="password" class="form-control" id="userPw" placeholder="Password" name="userPw">
+              <label for="userPw">Password</label>
+            </div>
+            <button class="btn btn-primary w-100 py-2 mt-2" type="submit" id="btn-send">DELETE</button>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">DELETE</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+
+    const deleteModal = new bootstrap.Modal("#deleteModal");
+    const btnDeleteAjax=document.querySelector("#btn-delete-ajax");
+    const btnSend= document.querySelector("#btn-send");
+    const userPw= document.querySelector("#userPw");
+
+    //$("#btn-delete-ajax").on()
+    btnDeleteAjax.addEventListener("click",()=>{
+      deleteModal.show();
+    });
+    btnSend.addEventListener("click",(e)=>{
+      e.preventDefault();
+      fetch("/member/delete/jjang051?userPw="+userPw.value)
+              .then(response=>response.json())
+              .then(json=>{
+                if(json.delete==="success") {
+                  alert("지워졌습니다.")
+                }else {
+                  alert("비밀번호확인해주세요.")
+                }
+              });
+    });
+
+
+  </script>
 </div>
 </body>
 </html>
