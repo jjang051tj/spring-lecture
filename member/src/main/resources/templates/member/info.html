@@ -68,21 +68,31 @@
       </div>
     </div>
   </div>
-  <script>
+  <script th:inline="javascript">
 
     const deleteModal = new bootstrap.Modal("#deleteModal");
     const btnDeleteAjax=document.querySelector("#btn-delete-ajax");
     const btnSend= document.querySelector("#btn-send");
     const userPw= document.querySelector("#userPw");
-
+    const loggedMemberUserId = [[ ${session?.loggedMemberDto?.userId} ]];
+    console.log("loggedMemberUserId==="+loggedMemberUserId);
     //$("#btn-delete-ajax").on()
     btnDeleteAjax.addEventListener("click",()=>{
       deleteModal.show();
     });
     btnSend.addEventListener("click",(e)=>{
       e.preventDefault();
-      fetch("/member/delete/jjang051?userPw="+userPw.value,{
-        method:"delete"
+      const sendData = {
+        userId:loggedMemberUserId,
+        userPw:userPw.value
+      }
+      fetch("../member/delete",{
+        method:"delete",
+        body:JSON.stringify(sendData),
+
+        headers:{
+          "Content-Type":"application/json"
+        }
       })
               .then(response=>response.json())
               .then(json=>{

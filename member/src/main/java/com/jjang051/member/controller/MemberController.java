@@ -146,4 +146,17 @@ public class MemberController {
         return map;
     }
 
+    @DeleteMapping("/delete")
+    @ResponseBody
+    public Map<String,String> deletAjax(@RequestBody MemberDto memberDto) {
+        System.out.println("@RequestBody MemberDto memberDto : " + memberDto.toString());
+        int result = memberService.deleteMember(memberDto);
+        Map<String,String> map = new HashMap<>();
+        if(result>0) {
+            map.put("delete","success");
+        }else {
+            map.put("delete","fail");
+        }
+        return map;
+    }
 }

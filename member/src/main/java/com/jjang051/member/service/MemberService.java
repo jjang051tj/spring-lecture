@@ -38,4 +38,10 @@ public class MemberService {
     public int deleteMember(String userId, String userPw) {
         return memberDao.deleteMember(userId,userPw);
     }
+
+    public int deleteMember(MemberDto memberDto) {
+        return memberDao.deleteMembeAjax(memberDto);
+    }
+
+
 }

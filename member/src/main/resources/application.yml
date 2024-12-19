@@ -19,3 +19,4 @@ mybatis:
   mapper-locations: classpath:mapper/sql/**/*.xml
   type-aliases-package: com.jjang051.member.dto
 #mybatis 설정
+

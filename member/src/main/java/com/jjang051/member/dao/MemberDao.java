@@ -24,4 +24,7 @@ public interface MemberDao {
 
     @Delete("delete from member where userId = #{userId} and userPw = #{userPw}")
     int deleteMember(@Param("userId") String userId, @Param("userPw") String userPw);
+
+    @Delete("delete from member where userId = #{userId} and userPw = #{userPw}")
+    int deleteMembeAjax(MemberDto memberDto);
 }
