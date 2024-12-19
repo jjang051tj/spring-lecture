@@ -6,10 +6,12 @@ import com.jjang051.member.dto.ToastDto;
 import com.jjang051.member.service.MemberService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -35,14 +37,18 @@ public class MemberController {
 //    }
 
     @GetMapping("/signup")
-    public String signup() {
+    public String signup(Model model) {
+        model.addAttribute("memberDto", new MemberDto());
         return "member/signup";
     }
 
     @PostMapping("/signup")
     //@ResponseBody
-    public String signup(@ModelAttribute MemberDto memberDto) {
-        //System.out.println(memberDto.toString());
+    public String signup(@Valid @ModelAttribute MemberDto memberDto, BindingResult bindingResult) {
+        if(bindingResult.hasErrors()) {
+            System.out.println("오류있어서 걸림");
+            return "/member/signup";
+        }
         int result = memberService.signup(memberDto);
         System.out.println("result : " + result);
         if(result>0) {

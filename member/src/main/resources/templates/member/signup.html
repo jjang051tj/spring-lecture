@@ -5,23 +5,25 @@
     <header th:replace="~{fragments/header}"></header>
     <main>
         <h2 class="mt-5 mb-5">SIGN UP</h2>
-        <form action="../member/signup" method="post">
+        <form action="../member/signup" method="post" th:action="@{/member/signup}" th:object="${memberDto}">
             <div class="mb-3">
                 <label for="userId" class="form-label fw-bold fs-5">USER ID</label>
                 <div class="row g-2">
                     <div class="col-10">
                         <input type="text" class="form-control form-control" name="userId" id="userId"
-                               placeholder="USER ID">
+                               placeholder="USER ID" th:field="*{userId}">
                     </div>
                     <div class="col-2">
                         <button class="btn  btn btn-primary w-100" id="btn-duplicate-id">아이디 중복 학인</button>
                     </div>
                 </div>
+                <div th:errors="*{userId}">여기에 에러메세지</div>
             </div>
             <div class="mb-3">
                 <label for="userPw" class="form-label fw-bold fs-5">PASSWORD</label>
-                <input type="text" class="form-control form-control" name="userPw" id="userPw"
+                <input type="text" class="form-control form-control" name="userPw" id="userPw" th:field="*{userPw}"
                        placeholder="PASSWORD">
+                <div th:errors="*{userPw}">여기에 에러메세지</div>
             </div>
             <div class="mb-3">
                 <label for="userName" class="form-label fw-bold fs-5">USER NAME</label>

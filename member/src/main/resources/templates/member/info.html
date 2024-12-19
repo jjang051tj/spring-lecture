@@ -45,7 +45,7 @@
   </main>
   <footer th:replace="~{fragments/footer}"></footer>
 
-  <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="false">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -97,14 +97,16 @@
               .then(response=>response.json())
               .then(json=>{
                 if(json.delete==="success") {
-                  alert("지워졌습니다.")
-                  location.href="../index/index";
+                  //alert("지워졌습니다.")
+                  deleteModal.hide();
+                  setTimeout(()=>{
+                    location.href="../index/index";
+                  },1000)
                 }else {
                   alert("비밀번호확인해주세요.")
                 }
               });
     });
-
 
   </script>
 </div>
