@@ -81,11 +81,14 @@
     });
     btnSend.addEventListener("click",(e)=>{
       e.preventDefault();
-      fetch("/member/delete/jjang051?userPw="+userPw.value)
+      fetch("/member/delete/jjang051?userPw="+userPw.value,{
+        method:"delete"
+      })
               .then(response=>response.json())
               .then(json=>{
                 if(json.delete==="success") {
                   alert("지워졌습니다.")
+                  location.href="../index/index";
                 }else {
                   alert("비밀번호확인해주세요.")
                 }
