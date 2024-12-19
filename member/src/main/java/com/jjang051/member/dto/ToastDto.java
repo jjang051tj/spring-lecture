@@ -8,7 +8,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class ModalDto {
+public class ToastDto {
     private boolean isShow;
     private String title;
     private String content;

@@ -2,6 +2,7 @@ package com.jjang051.member.controller;
 
 import com.jjang051.member.dto.MemberDto;
 import com.jjang051.member.dto.ModalDto;
+import com.jjang051.member.dto.ToastDto;
 import com.jjang051.member.service.MemberService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -66,7 +67,14 @@ public class MemberController {
                                         .title("로그인")
                                         .content(loggedMemberDto.getUserName()+"님 로그인되었습니다")
                                         .build();
-            redirectAttributes.addFlashAttribute("modalDto", modalDto);
+            ToastDto toastDto = ToastDto.builder()
+                    .isShow(true)
+                    .title("로그인")
+                    .content(loggedMemberDto.getUserName()+"님 로그인되었습니다")
+                    .build();
+
+            //redirectAttributes.addFlashAttribute("modalDto", modalDto);
+            redirectAttributes.addFlashAttribute("toastDto", toastDto);
             return "redirect:/index/index";
         }
         System.out.println("loggedMemberDto : " + loggedMemberDto.toString());

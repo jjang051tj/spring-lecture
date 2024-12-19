@@ -1,60 +1,76 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-    <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
-        <div class="col-md-4 d-flex align-items-center">
-            <a href="/" class="mb-3 me-2 mb-md-0 text-body-secondary text-decoration-none lh-1">
-                <svg class="bi" width="30" height="24">
-                    <use xlink:href="#bootstrap"></use>
-                </svg>
-            </a>
-            <span class="mb-3 mb-md-0 text-body-secondary">© 2024 Company, Inc</span>
+<footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+    <div class="col-md-4 d-flex align-items-center">
+        <a href="/" class="mb-3 me-2 mb-md-0 text-body-secondary text-decoration-none lh-1">
+            <svg class="bi" width="30" height="24">
+                <use xlink:href="#bootstrap"></use>
+            </svg>
+        </a>
+        <span class="mb-3 mb-md-0 text-body-secondary">© 2024 Company, Inc</span>
+    </div>
+    <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+        <li class="ms-3"><a class="text-body-secondary" href="#">
+            <svg class="bi" width="24" height="24">
+                <use xlink:href="#twitter"></use>
+            </svg>
+        </a></li>
+        <li class="ms-3"><a class="text-body-secondary" href="#">
+            <svg class="bi" width="24" height="24">
+                <use xlink:href="#instagram"></use>
+            </svg>
+        </a></li>
+        <li class="ms-3"><a class="text-body-secondary" href="#">
+            <svg class="bi" width="24" height="24">
+                <use xlink:href="#facebook"></use>
+            </svg>
+        </a></li>
+    </ul>
+</footer>
+<div class="toast-container position-fixed bottom-0 end-0 p-3">
+    <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="3000">
+        <div class="toast-header">
+            <strong class="me-auto" th:text="${toastDto?.title}">로그인</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
         </div>
+        <div class="toast-body" th:text="${toastDto?.content}">
+            밤하늘님 로그인 되었습니다.
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel"
+                    th:text="${modalDto?.title}">Modal title</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" th:text="${modalDto?.content}">
 
-        <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
-            <li class="ms-3"><a class="text-body-secondary" href="#">
-                <svg class="bi" width="24" height="24">
-                    <use xlink:href="#twitter"></use>
-                </svg>
-            </a></li>
-            <li class="ms-3"><a class="text-body-secondary" href="#">
-                <svg class="bi" width="24" height="24">
-                    <use xlink:href="#instagram"></use>
-                </svg>
-            </a></li>
-            <li class="ms-3"><a class="text-body-secondary" href="#">
-                <svg class="bi" width="24" height="24">
-                    <use xlink:href="#facebook"></use>
-                </svg>
-            </a></li>
-        </ul>
-        <!-- Modal -->
-        <th:block th:if="${modalDto!=null}">
-        <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel"
-                            th:text="${modalDto.title}">Modal title</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body" th:text="${modalDto.content}">
-
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
-                    </div>
-                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
             </div>
         </div>
-        <script th:inline="javascript">
-            const myModal = new bootstrap.Modal("#myModal");
-            const isShow = [[${modalDto.isShow}]];
-            console.log(isShow);
-            if(isShow) {
-                myModal.show();
-            }
-        </script>
-        </th:block>
-    </footer>
+    </div>
+</div>
+<script th:inline="javascript">
+    const myModal = new bootstrap.Modal("#myModal");
+    const isShow = /*[[${modalDto?.isShow}]]*/ false;
+    console.log(isShow);
+    if(isShow) {
+        myModal.show();
+    }
+    const liveToast = document.querySelector("#liveToast")
+    const toast = bootstrap.Toast.getOrCreateInstance(liveToast)
+    const isToastShow=/*[[${toastDto?.isShow}]]*/ false;
+    if(isToastShow) {
+        toast.show();
+    }
+</script>
+
+
+
 </html>
