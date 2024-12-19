@@ -17,7 +17,7 @@
         </tr>
         <tr>
           <th>USER NAME</th>
-          <td th:text="${infoMember.userId}">jjang051</td>
+          <td th:text="${infoMember.userName}">jjang051</td>
         </tr>
         <tr>
           <th>USER EMAIL</th>
@@ -37,7 +37,11 @@
         </tr>
       </tbody>
     </table>
-
+    <div class="mt-5 d-flex justify-content-center gutter-1">
+      <a href="/member/delete/jjang051" class="btn btn-primary">DELETE</a>
+      <button class="btn btn-primary">DELETE AJAX</button>
+      <a href="/member/modify" class="btn btn-primary">MODIFY</a>
+    </div>
   </main>
   <footer th:replace="~{fragments/footer}"></footer>
 </div>

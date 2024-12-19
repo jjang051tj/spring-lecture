@@ -1,10 +1,7 @@
 package com.jjang051.member.dao;
 
 import com.jjang051.member.dto.MemberDto;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
 
@@ -21,4 +18,10 @@ public interface MemberDao {
 
     @Select("select count(*) as count from member where userId = #{userId}")
     int idCheck(@Param("userId") String userId);
+
+    @Select("select * from member where userId = #{userId}")
+    MemberDto findById(@Param("userId") String userId);
+
+    @Delete("delete from member where userId = #{userId} and userPw = #{userPw}")
+    int deleteMember(@Param("userId") String userId, @Param("userPw") String userPw);
 }

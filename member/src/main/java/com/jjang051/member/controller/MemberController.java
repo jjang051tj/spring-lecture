@@ -96,4 +96,39 @@ public class MemberController {
         map.put("count",count);
         return map;
     }
+
+    //http://localhost/member/jjang051
+    @GetMapping("/{userId}")
+    public String info(@PathVariable String userId, Model model) {
+        MemberDto infoMemberDto = memberService.findById(userId);
+        model.addAttribute("infoMember", infoMemberDto);
+        return "/member/info";
+    }
+
+    @GetMapping("/delete/{userId}")
+    public String delete(@PathVariable String userId) {
+        return "/member/delete";
+    }
+
+    @PostMapping("/delete/{userId}")
+    public String delete(@PathVariable String userId,
+                         @RequestParam("userPw") String userPw,
+                         HttpSession session,
+                         @SessionAttribute MemberDto loggedMemberDto,
+                         RedirectAttributes redirectAttributes
+    ) {
+        int result = memberService.deleteMember(userId,userPw);
+        if(result>0) {
+            ModalDto modalDto = ModalDto.builder()
+                    .title("회원탈퇴")
+                    .content(loggedMemberDto.getUserName()+"님 삭제되었습니다.")
+                    .isShow(true)
+                    .build();
+            session.invalidate();
+            redirectAttributes.addFlashAttribute("modalDto", modalDto);
+            return "redirect:/index/index";
+        }
+        return "/member/delete";
+    }
+
 }

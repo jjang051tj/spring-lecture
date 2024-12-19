@@ -30,4 +30,12 @@ public class MemberService {
     public int idCheck(String userId) {
         return memberDao.idCheck(userId);
     }
+
+    public MemberDto findById(String userId) {
+        return memberDao.findById(userId);
+    }
+
+    public int deleteMember(String userId, String userPw) {
+        return memberDao.deleteMember(userId,userPw);
+    }
 }

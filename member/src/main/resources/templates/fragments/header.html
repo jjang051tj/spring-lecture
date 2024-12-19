@@ -19,7 +19,7 @@
     </th:block>
     <th:block th:unless="${session.loggedMemberDto == null}">
         <div class="col-md-3 text-end">
-            <a href="../member/info" th:href="@{/member/info}" class="btn btn-outline-primary"
+            <a href="../member/info" th:href="@{/member/{userId}(userId = ${session.loggedMemberDto.userId})}" class="btn btn-outline-primary"
                th:text="${session.loggedMemberDto.userName}">장성호</a>
             <a href="../member/logout" class="btn btn-primary">Logout</a>
             <a href="../board/list" class="btn btn-primary">Board</a>

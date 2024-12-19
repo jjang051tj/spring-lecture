@@ -1,0 +1,25 @@
+<html xmlns:th="http://thymeleaf.org">
+<head th:replace="~{fragments/head.html::myHead('LOGIN')}"></head>
+<body>
+<div class="container">
+    <header th:replace="~{fragments/header}"></header>
+    <main>
+        <h2 class="mt-5 mb-5">DELETE</h2>
+        <form action="../member/delete" method="post" th:action="@{/member/delete/{userId}(userId = ${session.loggedMemberDto.userId})}">
+            <div class="form-floating">
+                <input type="text" class="form-control" id="floatingInput" name="userId" placeholder="name@example.com"
+                       value="hong" th:value="${session.loggedMemberDto.userId}">
+                <label for="floatingInput">User ID</label>
+            </div>
+            <div class="form-floating mt-2">
+                <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="userPw">
+                <label for="floatingPassword">Password</label>
+            </div>
+            <button class="btn btn-primary w-100 py-2 mt-2" type="submit">DELETE</button>
+        </form>
+    </main>
+    <footer th:replace="~{fragments/footer}"></footer>
+</div>
+</body>
+</html>
+
