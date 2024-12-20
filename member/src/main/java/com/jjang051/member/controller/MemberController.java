@@ -36,7 +36,6 @@ public class MemberController {
     }
 
     @PostMapping("/signup")
-    @ResponseBody
     public String signup(@Valid @ModelAttribute MemberDto memberDto, BindingResult bindingResult) {
         if(bindingResult.hasErrors()) {
             return "/member/signup";
@@ -56,7 +55,6 @@ public class MemberController {
     }
 
     @PostMapping("/login")
-    @ResponseBody
     public String login(@Valid @ModelAttribute MemberDto memberDto,
                         BindingResult bindingResult,
                         HttpSession session,

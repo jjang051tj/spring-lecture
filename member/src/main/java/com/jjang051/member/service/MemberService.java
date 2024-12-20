@@ -25,51 +25,33 @@ public class MemberService {
     private final MemberDao memberDao;
 
     public int signup(MemberDto memberDto) {
-
-        //db입력을 여기서 한다.
-        //mybatis,jpa
-        //business logic
-        log.info("memberDto==={}",memberDto.getUserId());
-        log.info("memberDto.getProfile()==={}",memberDto.getProfile().toString());
-        log.info("memberDto.getProfile()==={}",memberDto.getProfile().getOriginalFilename());
-
-        LocalDateTime now = LocalDateTime.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
-        DateTimeFormatter folderFormatter = DateTimeFormatter.ofPattern("yyyyMMdd");
+        LocalDateTime now = LocalDateTime.now(); //오늘날짜
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss"); //이미지 리네임 저장용
+        DateTimeFormatter folderFormatter = DateTimeFormatter.ofPattern("yyyyMMdd"); // 폴더 저장용
 
         String time = now.format(formatter);
-        String folderName = upload+now.format(folderFormatter);
+        String folderName = now.format(folderFormatter);  //폴더 이름
+
         File folder = new File(folderName);
         if(!folder.exists()){
             folder.mkdir();
         }
-
         String originalFilename = memberDto.getProfile().getOriginalFilename();
-        String fileName = originalFilename.substring(0,originalFilename.lastIndexOf("."));
-        String extension = originalFilename.substring(originalFilename.lastIndexOf(".")+1);
-        String renameFile = fileName + "_" + time + "." + extension;
-        File targetFile = new File(folderName,renameFile);
+
+        String fileName = originalFilename.substring(0,originalFilename.lastIndexOf(".")); //원본 파일 이름
+        String extension = originalFilename.substring(originalFilename.lastIndexOf(".")+1); //원본 파일 확장자
+
+        String renameFile = fileName + "_" + time + "." + extension; // 원본파일_20241221111022.jpg
+        File targetFile = new File(upload+folderName,renameFile); // 파일 생성하고
         try {
-            memberDto.getProfile().transferTo(targetFile);
+            memberDto.getProfile().transferTo(targetFile);  // 폴더에 옮기기
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        log.info("renameFile==={}", renameFile);
-        //renameProifle  slide02_20241220110424.jpg
-
-        log.info("fileName==={}",fileName);
-        log.info("extension==={}",extension);
-
-
-        System.out.println("log");
-
-
         memberDto.setAddress(memberDto.getAddr01()+"/"+memberDto.getAddr02());
-        memberDto.setOriginalProfile("");
-        memberDto.setRenameProfile("");
-        //return memberDao.signUp(memberDto);
-        //날짜별 폴더 만들고 파일을 업로드
-        return 0;
+        memberDto.setOriginalProfile(originalFilename); //원본 파일이름 저장
+        memberDto.setRenameProfile(folderName+"/"+renameFile); // 바뀐 이름 저장
+        return memberDao.signUp(memberDto);
     }
 
     public MemberDto login(MemberDto memberDto) {
