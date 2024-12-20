@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,19 +23,11 @@ import java.util.Map;
 @RequestMapping("/member")
 @Controller
 @RequiredArgsConstructor
+@Slf4j
 public class MemberController {
 
-    //MemberService memberService = new MemberService();
-
-//    @Autowired
-//    private MemberService memberService;
-
     private final MemberService memberService; //불변성 유지
-    
-//    @RequiredArgsConstructor  //이 롬복 annotation이 final이 붙어있는 속성을 찾아서 생성자 매개변수 형태로 생성자 만들어줌
-//    public MemberController(MemberService memberService) {
-//        this.memberService = memberService;
-//    }
+
 
     @GetMapping("/signup")
     public String signup(Model model) {
@@ -43,10 +36,9 @@ public class MemberController {
     }
 
     @PostMapping("/signup")
-    //@ResponseBody
+    @ResponseBody
     public String signup(@Valid @ModelAttribute MemberDto memberDto, BindingResult bindingResult) {
         if(bindingResult.hasErrors()) {
-            System.out.println("오류있어서 걸림");
             return "/member/signup";
         }
         int result = memberService.signup(memberDto);
@@ -54,18 +46,23 @@ public class MemberController {
         if(result>0) {
             return "redirect:/index/index";
         }
+        log.info("signup result : " + result);
         return "/member/signup";
     }
     @GetMapping("/login")
-    public String login() {
+    public String login(Model model) {
+        model.addAttribute("memberDto", new MemberDto());
         return "/member/login";
     }
 
     @PostMapping("/login")
-    public String login(@ModelAttribute MemberDto memberDto,
+    @ResponseBody
+    public String login(@Valid @ModelAttribute MemberDto memberDto,
+                        BindingResult bindingResult,
                         HttpSession session,
                         RedirectAttributes redirectAttributes) {
         MemberDto loggedMemberDto =  memberService.login(memberDto);
+
         if(loggedMemberDto!=null) {
             session.setAttribute("loggedMemberDto", loggedMemberDto);
             ModalDto modalDto = ModalDto.builder()
@@ -80,10 +77,14 @@ public class MemberController {
                     .build();
 
             //redirectAttributes.addFlashAttribute("modalDto", modalDto);
+            if(bindingResult.hasErrors()) {
+                return "/member/login";
+            }
             redirectAttributes.addFlashAttribute("toastDto", toastDto);
             return "redirect:/index/index";
         }
-        System.out.println("loggedMemberDto : " + loggedMemberDto.toString());
+
+
         return "/member/login";
 
     }

@@ -5,18 +5,18 @@
     <header th:replace="~{fragments/header}"></header>
     <main>
         <h2 class="mt-5 mb-5">LOGIN</h2>
-        <form action="../member/login" method="post">
-            <img class="mt-4" src="../images/bootstrap-logo.svg" alt="" width="72" height="57">
+        <form action="../member/login" method="post" th:object="${memberDto}">
             <h2 class="h3 my-5 fw-bold">Please sign in</h2>
-
             <div class="form-floating">
                 <input type="text" class="form-control" id="floatingInput" name="userId" placeholder="name@example.com"
                        value="">
                 <label for="floatingInput">User ID</label>
+                <div th:errors="*{userId}" class="invalid-feedback" style="display: block">에러메세지</div>
             </div>
             <div class="form-floating mt-2">
                 <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="userPw">
                 <label for="floatingPassword">Password</label>
+                <div th:errors="*{userPw}" class="invalid-feedback" style="display: block">에러메세지</div>
             </div>
 
             <div class="form-check text-start my-3">

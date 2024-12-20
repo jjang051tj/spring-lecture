@@ -7,6 +7,8 @@ spring:
       enabled: true
     restart:
       enabled: true
+  messages:
+    basename: messages
 
   #oracle 설정
   datasource:
@@ -18,5 +20,15 @@ mybatis:
   config-location: classpath:mapper/config/config.xml
   mapper-locations: classpath:mapper/sql/**/*.xml
   type-aliases-package: com.jjang051.member.dto
-#mybatis 설정
+
+logging:
+  level:
+    root: info
+    #'[com.jjang051.member]': info
+    com.jjang051.member: info
+
+file:
+  path: C:/upload/
+
+
 

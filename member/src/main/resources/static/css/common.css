@@ -1,0 +1,10 @@
+.alert {
+    color:#f00;
+    font-size:12px;
+    font-weight:bold;
+}
+/*.alert:before {*/
+/*    content:"*";*/
+/*    display:inline-block;*/
+/*    margin-right: 5px;*/
+/*}*/

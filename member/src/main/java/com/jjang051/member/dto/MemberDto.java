@@ -5,6 +5,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @Getter
 @Setter
@@ -33,6 +34,9 @@ public class MemberDto {
     private String regDate;
     private String addr01;
     private String addr02;
+
+    private MultipartFile profile;
+
     private String originalProfile;
     private String renameProfile;
 }

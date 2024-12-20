@@ -5,7 +5,7 @@
     <header th:replace="~{fragments/header}"></header>
     <main>
         <h2 class="mt-5 mb-5">SIGN UP</h2>
-        <form action="../member/signup" method="post" th:action="@{/member/signup}" th:object="${memberDto}">
+        <form action="../member/signup" method="post" th:action="@{/member/signup}" th:object="${memberDto}" enctype="multipart/form-data">
             <div class="mb-3">
                 <label for="userId" class="form-label fw-bold fs-5">USER ID</label>
                 <div class="row g-2">
