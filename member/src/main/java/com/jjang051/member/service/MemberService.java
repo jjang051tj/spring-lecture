@@ -4,6 +4,7 @@ import com.jjang051.member.dao.MemberDao;
 import com.jjang051.member.dto.MemberDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import net.coobird.thumbnailator.Thumbnails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -31,7 +32,7 @@ public class MemberService {
 
         String time = now.format(formatter);
         String folderName = now.format(folderFormatter);  //폴더 이름
-
+        log.info("folderName==={}",folderName);
         File folder = new File(folderName);
         if(!folder.exists()){
             folder.mkdir();
@@ -45,6 +46,10 @@ public class MemberService {
         File targetFile = new File(upload+folderName,renameFile); // 파일 생성하고
         try {
             memberDto.getProfile().transferTo(targetFile);  // 폴더에 옮기기
+            Thumbnails.of(targetFile)
+                    .size(100,100)
+                    .keepAspectRatio(true)
+                    .toFile(targetFile);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
