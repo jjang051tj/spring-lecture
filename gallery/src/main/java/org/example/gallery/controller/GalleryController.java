@@ -28,21 +28,27 @@ public class GalleryController {
 
     public final GalleryService galleryService;
 
-    @GetMapping("/write")
-    public String write(Model model) {
+    private void sendCategory(Model model) {
         Map<String,String> map = new HashMap<>();
         map.put("paint","Paint");
         map.put("photo","Photo");
         map.put("sketch","Sketch");
-        model.addAttribute("galleryDto", new GalleryDto());
         model.addAttribute("category", map);
+    }
+
+    @GetMapping("/write")
+    public String write(Model model) {
+        
+        model.addAttribute("galleryDto", new GalleryDto());
+        sendCategory(model);
         return "gallery/write";
     }
 
     @PostMapping("/write")
     public String write(@Valid @ModelAttribute GalleryDto galleryDto,
-                        BindingResult bindingResult) {
+                        BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
+            sendCategory(model); 
             return "gallery/write";
         }
         int result = galleryService.write(galleryDto);
