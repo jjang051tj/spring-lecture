@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <title>Title</title>
+    <script src="/js/isotope.pkgd.min.js"></script>
   </head>
   <body>
     <ul id="list"></ul>
@@ -13,12 +14,18 @@
         .then((json) => {
           json.forEach((element) => {
             list.innerHTML += `
-                <li>
+                <li class="item">
                     <img src="/upload/${element.renameFileName}" />
                     <h2>${element.title}</h2>
                     <p>${element.description}</p>
                 </li>
             `;
+          });
+
+          const galleryIsotope = new Isotope(list, {
+            // options
+            itemSelector: ".item",
+            layoutMode: "masonry",
           });
         });
     </script>

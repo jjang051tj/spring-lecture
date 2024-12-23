@@ -49,6 +49,7 @@ public class GalleryController {
                         BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             sendCategory(model); 
+            System.out.println(bindingResult.toString());
             return "gallery/write";
         }
         int result = galleryService.write(galleryDto);
