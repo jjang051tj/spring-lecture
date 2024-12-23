@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head th:replace="~{fragments/head::myHead('REGISTER')}"></head>
+<body>
+<header th:replace="~{fragments/header}"></header>
+<container>
+    <main>
+        <form action="../gallery/write" method="post" th:action="@{/gallery/write}" th:object="${memberDto}" enctype="multipart/form-data">
+                        <input type="text" class="form-control form-control" name="userId" id="userId"
+                               placeholder="USER ID" th:field="*{userId}">
+                    </div>
+                <div th:errors="*{title}">여기에 에러메세지</div>
+
+            <div class="mb-3">
+                <label for="userPw" class="form-label fw-bold fs-5">DESCRIPTION</label>
+                <textarea type="text" class="form-control form-control" name="userPw" id="userPw" th:field="*{userPw}"
+                          placeholder="PASSWORD"></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="category" class="form-label fw-bold fs-5">CATEGORY</label>
+                <select class="form-select" aria-label="Default select example" id="category">
+                    <th:block th:each="item:${category}">
+                    <option value="${item.key}">[[${item.value}]]</option>
+                    </th:block>
+                </select>
+                </div>
+            <div class="mb-3">
+                <label for="point" class="form-label fw-bold fs-5">POINT</label>
+                        <input type="text" class="form-control form-control" name="point" id="point"
+                               placeholder="ZIPCODE">
+            <div class="mb-3">
+                <label for="img" class="form-label fw-bold fs-5">IMG</label>
+                <input type="text" class="form-control form-control" name="img" id="img" placeholder="TEL">
+            </div>
+            <div class="mb-3">
+                <label for="profile" class="form-label fw-bold fs-5">PROFILE</label>
+                <input type="file" class="form-control form-control" name="profile" id="profile"
+                       placeholder="profile">
+            </div>
+            <div class="mt-5">
+                <button class="btn btn-primary">SIGN UP</button>
+            </div>
+        </form>
+    </main>
+</container>
+<footer th:replace="~{fragments/footer}"></footer>
+</body>
+</html>

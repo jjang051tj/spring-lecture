@@ -1,108 +1,173 @@
 <html xmlns:th="http://thymeleaf.org">
-<head th:replace="~{fragments/head::myHead('SIGNUP')}"></head>
-<body>
-<div class="container">
-    <header th:replace="~{fragments/header}"></header>
-    <main>
+  <head th:replace="~{fragments/head::myHead('SIGNUP')}"></head>
+  <body>
+    <div class="container">
+      <header th:replace="~{fragments/header}"></header>
+      <main>
         <h2 class="mt-5 mb-5">SIGN UP</h2>
-        <form action="../member/signup" method="post" th:action="@{/member/signup}" th:object="${memberDto}" enctype="multipart/form-data">
-            <div class="mb-3">
-                <label for="userId" class="form-label fw-bold fs-5">USER ID</label>
-                <div class="row g-2">
-                    <div class="col-10">
-                        <input type="text" class="form-control form-control" name="userId" id="userId"
-                               placeholder="USER ID" th:field="*{userId}">
-                    </div>
-                    <div class="col-2">
-                        <button class="btn  btn btn-primary w-100" id="btn-duplicate-id">아이디 중복 학인</button>
-                    </div>
-                </div>
-                <div th:errors="*{userId}">여기에 에러메세지</div>
+        <form
+          action="../member/signup"
+          method="post"
+          th:action="@{/member/signup}"
+          th:object="${memberDto}"
+          enctype="multipart/form-data"
+        >
+          <div class="mb-3">
+            <label for="userId" class="form-label fw-bold fs-5">USER ID</label>
+            <div class="row g-2">
+              <div class="col-10">
+                <input
+                  type="text"
+                  class="form-control form-control"
+                  name="userId"
+                  id="userId"
+                  placeholder="USER ID"
+                  th:field="*{userId}"
+                />
+              </div>
+              <div class="col-2">
+                <button class="btn btn btn-primary w-100" id="btn-duplicate-id">
+                  아이디 중복 학인
+                </button>
+              </div>
             </div>
-            <div class="mb-3">
-                <label for="userPw" class="form-label fw-bold fs-5">PASSWORD</label>
-                <input type="text" class="form-control form-control" name="userPw" id="userPw" th:field="*{userPw}"
-                       placeholder="PASSWORD">
-                <div th:errors="*{userPw}">여기에 에러메세지</div>
+            <div th:errors="*{userId}">여기에 에러메세지</div>
+          </div>
+          <div class="mb-3">
+            <label for="userPw" class="form-label fw-bold fs-5">PASSWORD</label>
+            <input
+              type="text"
+              class="form-control form-control"
+              name="userPw"
+              id="userPw"
+              th:field="*{userPw}"
+              placeholder="PASSWORD"
+            />
+            <div th:errors="*{userPw}">여기에 에러메세지</div>
+          </div>
+          <div class="mb-3">
+            <label for="userName" class="form-label fw-bold fs-5"
+              >USER NAME</label
+            >
+            <input
+              type="text"
+              class="form-control form-control"
+              name="userName"
+              id="userName"
+              placeholder="USER NAME"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="userEmail" class="form-label fw-bold fs-5">EMAIL</label>
+            <div class="row g-2">
+              <div class="col-10">
+                <input
+                  type="text"
+                  class="form-control form-control"
+                  name="userEmail"
+                  id="userEmail"
+                  placeholder="name@example.com"
+                />
+              </div>
+              <div class="col-2">
+                <button
+                  class="btn btn btn-primary w-100"
+                  id="btn-duplicate-email"
+                >
+                  이메일 중복 학인
+                </button>
+              </div>
             </div>
-            <div class="mb-3">
-                <label for="userName" class="form-label fw-bold fs-5">USER NAME</label>
-                <input type="text" class="form-control form-control" name="userName" id="userName"
-                       placeholder="USER NAME">
+            <div th:errors="*{userEmail}">여기에 에러메세지</div>
+          </div>
+          <div class="mb-3">
+            <label for="zipcode" class="form-label fw-bold fs-5">ZIPCODE</label>
+            <div class="row g-2">
+              <div class="col-10">
+                <input
+                  type="text"
+                  class="form-control form-control"
+                  name="zipcode"
+                  id="zipcode"
+                  placeholder="ZIPCODE"
+                />
+              </div>
+              <div class="col-2">
+                <button class="btn btn-primary btn w-100" id="btn-zipcode">
+                  우편번호 검색
+                </button>
+              </div>
             </div>
-            <div class="mb-3">
-                <label for="userEmail" class="form-label fw-bold fs-5">EMAIL</label>
-                <div class="row g-2">
-                    <div class="col-10">
-                        <input type="text" class="form-control form-control" name="userEmail" id="userEmail"
-                               placeholder="name@example.com">
-                    </div>
-                    <div class="col-2">
-                        <button class="btn  btn btn-primary w-100" id="btn-duplicate-email">이메일 중복 학인</button>
-                    </div>
-                </div>
-            </div>
-            <div class="mb-3">
-                <label for="zipcode" class="form-label fw-bold fs-5">ZIPCODE</label>
-                <div class="row g-2">
-                    <div class="col-10">
-                        <input type="text" class="form-control form-control" name="zipcode" id="zipcode"
-                               placeholder="ZIPCODE">
-                    </div>
-                    <div class="col-2">
-                        <button class="btn btn-primary btn w-100" id="btn-zipcode">우편번호 검색</button>
-                    </div>
-                </div>
-            </div>
-            <div class="mb-3">
-                <label for="addr01" class="form-label fw-bold fs-5">ADDRESS</label>
-                <input type="text" class="form-control form-control" name="addr01" id="addr01"
-                       placeholder="ADDRESS">
-            </div>
-            <div class="mb-3">
-                <label for="addr02" class="form-label fw-bold fs-5">DETAIL ADDRESS</label>
-                <input type="text" class="form-control form-control" name="addr02" id="addr02"
-                       placeholder="ADDRESS">
-            </div>
-            <div class="mb-3">
-                <label for="addr02" class="form-label fw-bold fs-5">TEL</label>
-                <input type="text" class="form-control form-control" name="tel" id="tel" placeholder="TEL">
-            </div>
-            <div class="mb-3">
-                <label for="profile" class="form-label fw-bold fs-5">PROFILE</label>
-                <input type="file" class="form-control form-control" name="profile" id="profile"
-                       placeholder="profile">
-            </div>
-            <div class="mt-5">
-                <button class="btn btn-primary">SIGN UP</button>
-            </div>
+          </div>
+          <div class="mb-3">
+            <label for="addr01" class="form-label fw-bold fs-5">ADDRESS</label>
+            <input
+              type="text"
+              class="form-control form-control"
+              name="addr01"
+              id="addr01"
+              placeholder="ADDRESS"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="addr02" class="form-label fw-bold fs-5"
+              >DETAIL ADDRESS</label
+            >
+            <input
+              type="text"
+              class="form-control form-control"
+              name="addr02"
+              id="addr02"
+              placeholder="ADDRESS"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="addr02" class="form-label fw-bold fs-5">TEL</label>
+            <input
+              type="text"
+              class="form-control form-control"
+              name="tel"
+              id="tel"
+              placeholder="TEL"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="profile" class="form-label fw-bold fs-5">PROFILE</label>
+            <input
+              type="file"
+              class="form-control form-control"
+              name="profile"
+              id="profile"
+              placeholder="profile"
+            />
+          </div>
+          <div class="mt-5">
+            <button class="btn btn-primary">SIGN UP</button>
+          </div>
         </form>
-    </main>
-    <footer th:replace="~{fragments/footer}"></footer>
-
-</div>
+      </main>
+      <footer th:replace="~{fragments/footer}"></footer>
+    </div>
     <script>
-        const btnDuplicateId = document.querySelector("#btn-duplicate-id");
-        const userId = document.querySelector("#userId");
-        btnDuplicateId.addEventListener("click",(e)=>{
-            e.preventDefault();
-            fetch("../member/id-check?userId="+userId.value)
-                .then(response=>response.json())
-                .then(json=>{
-                    console.log(json); //{count:0}
-                    if(json.count>0) {
-                        alert("쓸 수 없는 아이디입니다.");
-                    } else {
-                        let used = confirm("쓸 수 있는 아이디입니다. 사용하시겠습니까?");
-                        if(!used) {
-                            userId.value="";
-                            userId.focus();
-                        }
-                    }
-                })
-        })
-
+      const btnDuplicateId = document.querySelector("#btn-duplicate-id");
+      const userId = document.querySelector("#userId");
+      btnDuplicateId.addEventListener("click", (e) => {
+        e.preventDefault();
+        fetch("../member/id-check?userId=" + userId.value)
+          .then((response) => response.json())
+          .then((json) => {
+            console.log(json); //{count:0}
+            if (json.count > 0) {
+              alert("쓸 수 없는 아이디입니다.");
+            } else {
+              let used = confirm("쓸 수 있는 아이디입니다. 사용하시겠습니까?");
+              if (!used) {
+                userId.value = "";
+                userId.focus();
+              }
+            }
+          });
+      });
     </script>
-</body>
+  </body>
 </html>
-
