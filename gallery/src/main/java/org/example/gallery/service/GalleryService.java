@@ -48,7 +48,7 @@ public class GalleryService {
 
                 Path folderPath = Paths.get(filePath+folderName);
 
-                galleryDto.setRenameFileName(folderName + renameFileName);
+                galleryDto.setRenameFileName(folderName +"/"+ renameFileName);
                 try {
                     // 폴더가 없으면 만들어라
                     if (Files.notExists(folderPath)) {
@@ -57,9 +57,9 @@ public class GalleryService {
 
                     Path targetFile = Paths.get(filePath + folderName + "/" + renameFileName);
                     galleryDto.getImg().transferTo(targetFile.toFile());
-                    Thumbnails.of(targetFile.toFile())
-                            .size(100, 100)
-                            .toFile(targetFile.toFile());
+                    // Thumbnails.of(targetFile.toFile())
+                    //         .size(100, 100)
+                    //         .toFile(targetFile.toFile());
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }

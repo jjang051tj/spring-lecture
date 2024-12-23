@@ -58,10 +58,16 @@ public class GalleryController {
         return "gallery/list";
     }
 
+    // @GetMapping("/json")
+    // @ResponseBody
+    // public Map<String,List<GalleryDto>> getAllList() {
+    //     Map<String,List<GalleryDto>> map = new HashMap();
+    //     map.put("list", galleryService.getAllList());
+    //     return map;
+    // }
     @GetMapping("/json")
     @ResponseBody
     public List<GalleryDto> getAllList() {
-        galleryService.getAllList();
         return galleryService.getAllList();
     }
 

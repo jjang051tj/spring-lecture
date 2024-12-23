@@ -5,18 +5,21 @@
     <title>Title</title>
   </head>
   <body>
-    <ul>
-      <li>
-        <img src="aaa.jpg" />
-        <h2>제목</h2>
-        <p>내용</p>
-      </li>
-    </ul>
+    <ul id="list"></ul>
     <script>
+      const list = document.querySelector("#list");
       fetch("../gallery/json")
         .then((response) => response.json())
         .then((json) => {
-          console.log(json);
+          json.forEach((element) => {
+            list.innerHTML += `
+                <li>
+                    <img src="/upload/${element.renameFileName}" />
+                    <h2>${element.title}</h2>
+                    <p>${element.description}</p>
+                </li>
+            `;
+          });
         });
     </script>
   </body>
