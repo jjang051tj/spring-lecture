@@ -1,16 +1,27 @@
+server:
+  port: 8080
+
 spring:
   application:
     name: gallery
   devtools:
-    livereload:
-      enabled: true # LiveReload 활성화
     restart:
-      enabled: true # 애플리케이션 자동 재시작 활성화
+      enabled: true
+    livereload:
+      enabled: true
 
-  #oracle 설정
   datasource:
     driver-class-name: oracle.jdbc.OracleDriver
-    url: jdbc:oracle:thin:@localhost:1521:xe # Oracle DB 연결 URL
-    username: dydqja01  # DB 사용자명
-    password: 1234 # DB 비밀번호
+    url: jdbc:oracle:thin:@localhost
+    username: crof672
+    password: 1234
 
+file:
+  path: C:\upload\
+
+#mybatis:
+#  config-location: classpath:mapper/config/config.xml
+#  mapper-locations: classpath:mapper/sql/**/*.xml
+#  # 타입 알리야스 (별칭 붙이기 >> 간편하게 쓰기 위함)
+#  # config.xml 에 쓰거나 여기에 써도 됨
+#  type-aliases-package: com.example.gallery.dto

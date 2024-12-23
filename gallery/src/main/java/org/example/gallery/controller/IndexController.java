@@ -1,4 +1,4 @@
-package com.dydqja5750.gallery.controller;
+package org.example.gallery.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class IndexController {
     @GetMapping("/index/index")
     public String index() {
-        return "/index/index";
+        return "index/index";
     }
 }

@@ -1,4 +1,4 @@
-package com.dydqja5750.gallery;
+package org.example.gallery;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
