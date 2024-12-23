@@ -1,12 +1,24 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://thymeleaf.org">
   <head>
     <meta charset="UTF-8" />
     <title>Title</title>
+    <link rel="stylesheet" href="/css/layout.css" />
     <script src="/js/isotope.pkgd.min.js"></script>
   </head>
   <body>
-    <ul id="list"></ul>
+    <header>
+      <h1>portfolio</h1>
+    </header>
+    <div class="filter-box">
+      <button data-filter="item">ALL</button>
+      <button
+        th:each="item:${category}"
+        th:text="${item.key}"
+        th:attr="data-filter=${item.key}"
+      ></button>
+    </div>
+    <ul id="list" class="list"></ul>
     <script>
       const list = document.querySelector("#list");
       fetch("../gallery/json")
@@ -14,7 +26,7 @@
         .then((json) => {
           json.forEach((element) => {
             list.innerHTML += `
-                <li class="item">
+                <li class="item ${element.category}">
                     <img src="/upload/${element.renameFileName}" />
                     <h2>${element.title}</h2>
                     <p>${element.description}</p>
