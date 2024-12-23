@@ -35,9 +35,17 @@
           });
 
           const galleryIsotope = new Isotope(list, {
-            // options
             itemSelector: ".item",
             layoutMode: "masonry",
+          });
+          const btns = document.querySelectorAll(".filter-box button");
+          btns.forEach((item) => {
+            item.addEventListener("click", () => {
+              console.log(item.dataset.filter);
+              //const filterClass = "." + item.dataset.filter;
+              const filterClass = `.${item.dataset.filter}`;
+              galleryIsotope.arrange({ filter: filterClass });
+            });
           });
         });
     </script>
