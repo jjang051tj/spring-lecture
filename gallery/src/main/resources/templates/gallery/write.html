@@ -1,126 +1,179 @@
 <!DOCTYPE html>
 <html xmlns:th="http://thymeleaf.org" lang="en">
-<head th:replace="~{fragments/head::myHead(WRITE)}"></head>
-<body>
-<header th:replace="~{fragments/header}"></header>
-<main class="row">
-    <div class="container col-6">
+  <head th:replace="~{fragments/head::myHead(WRITE)}"></head>
+  <body>
+    <header th:replace="~{fragments/header}"></header>
+    <main class="row">
+      <div class="container col-6">
         <h1 class="text-center my-5">게시물 작성</h1>
-        <form action="/gallery/write" th:action="@{/gallery/write}" th:object="${galleryDto}"
-              method="post" enctype="multipart/form-data" class="needs-validation">
-
-            <!-- 제목 -->
-            <div class="mb-3">
-                <label for="title" class="form-label">제목</label>
-                <input type="text" name="title" th:field="*{title}"
-                       class="form-control" id="title"
-                       placeholder="제목을 입력하세요"/>
-                <!-- 에러 및 제한사항 -->
-                <div id="nameBlock" class="form-text">
-                    제한사항 안내
-                </div>
-                <div th:errors="*{title}" class="invalid-feedback" style="display: block">
-                    이름 입력바랍니다.
-                </div>
+        <form
+          action="/gallery/write"
+          th:action="@{/gallery/write}"
+          th:object="${galleryDto}"
+          method="post"
+          enctype="multipart/form-data"
+          class="needs-validation"
+        >
+          <!-- 제목 -->
+          <div class="mb-3">
+            <label for="title" class="form-label">제목</label>
+            <input
+              type="text"
+              name="title"
+              th:field="*{title}"
+              class="form-control"
+              id="title"
+              placeholder="제목을 입력하세요"
+            />
+            <!-- 에러 및 제한사항 -->
+            <div id="nameBlock" class="form-text">제한사항 안내</div>
+            <div
+              th:errors="*{title}"
+              class="invalid-feedback"
+              style="display: block"
+            >
+              이름 입력바랍니다.
             </div>
+          </div>
 
-            <!-- 내용 -->
-            <div class="mb-3">
-                <label for="description" class="form-label">내용</label>
-                <textarea name="description" class="form-control" id="description"
-                          th:field="*{description}">
-                    </textarea>
-                <!-- 에러 및 제한사항 -->
-                <div id="idBlock" class="form-text">
-                    제한사항 안내
-                </div>
-                <div th:errors="*{description}" class="invalid-feedback" style="display: block">
-                    내용 오류
-                </div>
+          <!-- 내용 -->
+          <div class="mb-3">
+            <label for="description" class="form-label">내용</label>
+            <textarea
+              name="description"
+              class="form-control"
+              id="description"
+              th:field="*{description}"
+            >
+            </textarea>
+            <!-- 에러 및 제한사항 -->
+            <div id="idBlock" class="form-text">제한사항 안내</div>
+            <div
+              th:errors="*{description}"
+              class="invalid-feedback"
+              style="display: block"
+            >
+              내용 오류
             </div>
+          </div>
 
-            <!-- 카테고리 -->
-            <div class="mb-3">
-                <label class="form-label" for="category">카테고리</label>
-                <select class="form-select" id="category" name="category" aria-label="Default select example">
-                    <option selected>카테고리를 선택해주세요</option>
-                    <th:block th:each="item:${category}">
-                        <option value="${item.key}">[[${item.value}]]</option>
-                    </th:block>
-                </select>
-                <div th:errors="*{category}" class="invalid-feedback" style="display: block">
-                    내용 오류
-                </div>
+          <!-- 카테고리 -->
+          <div class="mb-3">
+            <label class="form-label" for="category">카테고리</label>
+            <select
+              class="form-select"
+              id="category"
+              name="category"
+              aria-label="Default select example"
+            >
+              <option selected>카테고리를 선택해주세요</option>
+              <th:block th:each="item:${category}">
+                <option value="paint" th:value="${item.key}">
+                  [[${item.value}]]
+                </option>
+              </th:block>
+            </select>
+            <div
+              th:errors="*{category}"
+              class="invalid-feedback"
+              style="display: block"
+            >
+              내용 오류
             </div>
+          </div>
 
-            <!-- 점수 -->
-            <div class="mb-3">
-                <label class="form-label" for="point">점수</label>
-                <input class="form-control" type="text" name="point" id="point"
-                       placeholder="0점에서 5점까지 입력가능합니다">
-                <!-- 에러 및 제한사항 -->
-                <div th:errors="*{point}" class="invalid-feedback" style="display: block">
-                    내용 오류
-                </div>
+          <!-- 점수 -->
+          <div class="mb-3">
+            <label class="form-label" for="point">점수</label>
+            <input
+              class="form-control"
+              type="text"
+              name="point"
+              id="point"
+              placeholder="0점에서 5점까지 입력가능합니다"
+            />
+            <!-- 에러 및 제한사항 -->
+            <div
+              th:errors="*{point}"
+              class="invalid-feedback"
+              style="display: block"
+            >
+              내용 오류
             </div>
+          </div>
 
-            <!-- 비밀번호 -->
-            <div class="mb-3">
-                <label for="user-pw" class="form-label">비밀번호</label>
-                <input type="password" name="userPw" id="user-pw"
-                       placeholder="Your Password" class="form-control"/>
+          <!-- 비밀번호 -->
+          <div class="mb-3">
+            <label for="user-pw" class="form-label">비밀번호</label>
+            <input
+              type="password"
+              name="userPw"
+              id="user-pw"
+              placeholder="Your Password"
+              class="form-control"
+            />
 
-                <!--에러 및 제한사항-->
-                <div id="passwordBlock" class="form-text">
-                    제한사항 안내
-                </div>
+            <!--에러 및 제한사항-->
+            <div id="passwordBlock" class="form-text">제한사항 안내</div>
+          </div>
+
+          <!-- 작품 -->
+          <div class="mb-3">
+            <label for="img" class="form-label">작품을 선택해주세요</label>
+            <input
+              class="form-control"
+              type="file"
+              id="img"
+              name="img"
+              th:field="*{img}"
+            />
+            <div
+              th:errors="*{img}"
+              class="invalid-feedback"
+              style="display: block"
+            >
+              내용 오류
             </div>
+          </div>
+          <!-- 프리뷰 -->
+          <div class="mb-3">
+            <div id="preview"></div>
+          </div>
 
-            <!-- 작품 -->
-            <div class="mb-3">
-                <label for="img" class="form-label">작품을 선택해주세요</label>
-                <input class="form-control" type="file" id="img" name="img" th:field="*{img}">
-                <div th:errors="*{img}" class="invalid-feedback" style="display: block">
-                    내용 오류
-                </div>
-            </div>
-            <!-- 프리뷰 -->
-            <div class="mb-3">
-                <div id="preview">
-
-                </div>
-            </div>
-
-            <div>
-                <button class="btn btn-info mt-3 w-100" id="btn-signup">REGISTER</button>
-            </div>
+          <div>
+            <button class="btn btn-info mt-3 w-100" id="btn-signup">
+              REGISTER
+            </button>
+          </div>
         </form>
-    </div>
-</main>
-<footer th:replace="~{fragments/footer}"></footer>
-<script>
-    //프로필 미리보기
-    const imgFile = document.querySelector("#img");
-    imgFile.addEventListener("change", (e) => {
+      </div>
+    </main>
+    <footer th:replace="~{fragments/footer}"></footer>
+    <script>
+      //프로필 미리보기
+      const imgFile = document.querySelector("#img");
+      imgFile.addEventListener("change", (e) => {
         const file = e.target.files[0];
         if (!file) {
-            preview.innerHTML = "";
-            return false;
+          preview.innerHTML = "";
+          return false;
         }
-        const extension = file.name.substring(file.name.lastIndexOf(".") + 1).toLowerCase();
+        const extension = file.name
+          .substring(file.name.lastIndexOf(".") + 1)
+          .toLowerCase();
         const imgArray = ["png", "jpg", "jpeg", "gif"];
         if (!imgArray.includes(extension)) {
-            alert("이미지만 업로드 가능합니다.");
-            imgFile.value = "";
-            return false;
+          alert("이미지만 업로드 가능합니다.");
+          imgFile.value = "";
+          return false;
         }
         const fileReader = new FileReader();
         fileReader.addEventListener("load", (e) => {
-            const img = e.target.result;
-            preview.innerHTML = "<img style='width: 100px ' src=" + img + ">";
+          const img = e.target.result;
+          preview.innerHTML = "<img style='width: 100px ' src=" + img + ">";
         });
         fileReader.readAsDataURL(file);
-    });
-</script>
-</body>
+      });
+    </script>
+  </body>
 </html>

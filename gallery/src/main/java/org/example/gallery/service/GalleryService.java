@@ -15,6 +15,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -37,15 +38,15 @@ public class GalleryService {
                 String extension = writeFile.substring(writeFile.lastIndexOf("."));
 
                 LocalDateTime now = LocalDateTime.now();
-                DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
+                DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");  
                 String writeTime = now.format(format);
 
                 DateTimeFormatter folderFormat = DateTimeFormatter.ofPattern("yyyyMMdd");
                 String folderName = now.format(folderFormat);
 
-                String renameFileName = onlyFileName + "_" + writeTime + extension;
+                String renameFileName = onlyFileName + "_" + writeTime + extension;   
 
-                Path folderPath = Paths.get(folderName);
+                Path folderPath = Paths.get(filePath+folderName);
 
                 galleryDto.setRenameFileName(folderName + renameFileName);
                 try {
@@ -65,5 +66,9 @@ public class GalleryService {
             }
         }
         return galleryDao.write(galleryDto);
+    }
+
+    public List<GalleryDto> getAllList() {
+        return galleryDao.getAllList();
     }
 }

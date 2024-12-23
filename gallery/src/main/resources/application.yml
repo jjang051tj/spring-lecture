@@ -13,12 +13,11 @@ spring:
   datasource:
     driver-class-name: oracle.jdbc.OracleDriver
     url: jdbc:oracle:thin:@localhost
-    username: crof672
+    username: jjang052
     password: 1234
 
 file:
   path: C:\upload\
-
 #mybatis:
 #  config-location: classpath:mapper/config/config.xml
 #  mapper-locations: classpath:mapper/sql/**/*.xml

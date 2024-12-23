@@ -14,7 +14,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 
 @Controller
 @RequestMapping("/gallery")
@@ -36,7 +40,7 @@ public class GalleryController {
     }
 
     @PostMapping("/write")
-    public String write(@ModelAttribute @Valid GalleryDto galleryDto,
+    public String write(@Valid @ModelAttribute GalleryDto galleryDto,
                         BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "gallery/write";
@@ -46,5 +50,17 @@ public class GalleryController {
             return "redirect:/gallery/list";
         }
         return "gallery/list";
+    }
+
+    @GetMapping("/json")
+    @ResponseBody
+    public List<GalleryDto> getAllList() {
+        galleryService.getAllList();
+        return galleryService.getAllList();
+    }
+
+    @GetMapping("/list")
+    public String list() {
+        return "/gallery/list";
     }
 }
