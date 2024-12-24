@@ -24,11 +24,11 @@ public class GalleryDto {
     @Size(message = "최소 10자, 최대 1000자 이내로 작성해주세요", min = 10, max = 1000)
     private String description;
 
-    @NotNull
-    @Range(max = 5, message = "점수는 0점에서 5점까지만 줄 수 있습니다")
+    //@NotNull
+    //@Range(max = 5, message = "점수는 0점에서 5점까지만 줄 수 있습니다")
     private Double point;
     
-    @NotBlank(message = "카테고리는 필수 입력사항입니다")
+    //@NotBlank(message = "카테고리는 필수 입력사항입니다")
     private String category;
     private MultipartFile img;
     private String originalFileName;

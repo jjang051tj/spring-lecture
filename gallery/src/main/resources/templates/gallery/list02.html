@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Title</title>
+    <link rel="stylesheet" href="/css/layout.css" />
+    <script src="/js/isotope.pkgd.min.js"></script>
+  </head>
+  <body>
+    <header>
+      <h1>portfolio</h1>
+    </header>
+    <div class="filter-box">
+      <button data-filter="item">ALL</button>
+      <th:block th:each="item:${category}">
+        <button
+          th:text="${item.key}"
+          th:attr="data-filter=${item.key}"
+        ></button>
+      </th:block>
+    </div>
+    <ul id="list" class="list">
+      <th:block th:each="item:${galleryList}">
+        <li class="item" th:classappend="${item.category}">
+          <img src="" th:src="@{|/upload/${item.renameFileName}|}" />
+          <h2 th:text="${item.title}">제목</h2>
+          <p th:text="${item.description}">내용</p>
+          <p class="point" th:text="${item.point}">3.5</p>
+        </li>
+      </th:block>
+    </ul>
+    <script>
+      const list = document.querySelector("#list");
+      const galleryIsotope = new Isotope(list, {
+        itemSelector: ".item",
+        layoutMode: "masonry",
+      });
+      const btns = document.querySelectorAll(".filter-box button");
+      btns.forEach((item) => {
+        item.addEventListener("click", () => {
+          console.log(item.dataset.filter);
+          //const filterClass = "." + item.dataset.filter;
+          const filterClass = `.${item.dataset.filter}`;
+          galleryIsotope.arrange({ filter: filterClass });
+        });
+      });
+    </script>
+  </body>
+</html>

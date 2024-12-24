@@ -77,4 +77,11 @@ public class GalleryController {
         sendCategory(model);
         return "/gallery/list";
     }
+
+    @GetMapping("/list02")
+    public String list02(Model model) {
+        sendCategory(model);
+        model.addAttribute("galleryList", galleryService.getAllList());
+        return "/gallery/list02";
+    }
 }
