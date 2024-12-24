@@ -9,6 +9,8 @@
     <h1>detail</h1>
     <p th:text="${question.title}"></p>
     <p th:text="${question.content}"></p>
-    <p th:text="${question.regDate}"></p>
+    <span
+      th:text="${#temporals.format(question.regDate, 'yyyy/MM/dd HH:mm:ss')}"
+    ></span>
   </body>
 </html>
