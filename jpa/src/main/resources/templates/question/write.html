@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://thymeleaf.org">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -7,5 +7,14 @@
   </head>
   <body>
     <h1>question</h1>
+    <form
+      action="/question/write"
+      th:action="@{|/question/write|}"
+      method="post"
+    >
+      <div><input type="text" name="title" /></div>
+      <div><textarea name="content" rows="5"></textarea></div>
+      <div><button>confirm</button></div>
+    </form>
   </body>
 </html>

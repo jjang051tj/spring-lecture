@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>list</h1>
+    <ul>
+      <th:block th:each="item:${questionList}">
+        <li>
+          <span th:text="${item.id}"></span>
+          <span th:text="${item.title}"></span>
+          <span th:text="${item.content}"></span>
+          <span th:text="${item.regDate}"></span>
+        </li>
+      </th:block>
+    </ul>
+  </body>
+</html>

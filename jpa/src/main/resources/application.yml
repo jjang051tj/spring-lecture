@@ -5,11 +5,11 @@ spring:
   application:
     name: jpa
 
-  devtools:
-    restart:
-      enabled: true
-    livereload:
-      enabled: true
+  # devtools:
+  #   restart:
+  #     enabled: true
+  #   livereload:
+  #     enabled: true
 
   datasource:
     driver-class-name: oracle.jdbc.OracleDriver
@@ -24,7 +24,7 @@ spring:
         format_sql: true
 
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
 
