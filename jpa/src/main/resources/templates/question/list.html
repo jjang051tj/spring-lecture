@@ -10,10 +10,12 @@
     <ul>
       <th:block th:each="item:${questionList}">
         <li>
-          <span th:text="${item.id}"></span>
-          <span th:text="${item.title}"></span>
-          <span th:text="${item.content}"></span>
-          <span th:text="${item.regDate}"></span>
+          <a href="fhds" th:href="@{|/question/detail/${item.id}|}">
+            <span th:text="${item.id}"></span>
+            <span th:text="${item.title}"></span>
+            <span th:text="${item.content}"></span>
+            <span th:text="${item.regDate}"></span>
+          </a>
         </li>
       </th:block>
     </ul>

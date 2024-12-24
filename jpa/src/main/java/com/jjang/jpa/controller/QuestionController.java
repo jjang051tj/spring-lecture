@@ -15,6 +15,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 
@@ -44,5 +45,16 @@ public class QuestionController {
     List<Question> questionList = questionService.getList();
     model.addAttribute("questionList", questionList);
     return "/question/list";
+  }
+  // @GetMapping("/detail/{id}")
+  // @ResponseBody
+  // public Question detail(@PathVariable("id") Integer id) {
+  //     return questionService.getQuestion(id);
+  // }
+  @GetMapping("/detail/{id}")
+  public String detail(Model model,@PathVariable("id") Integer id) {
+    Question question = questionService.getQuestion(id);
+    model.addAttribute("question", question);
+      return "/question/detail";
   }
 }
