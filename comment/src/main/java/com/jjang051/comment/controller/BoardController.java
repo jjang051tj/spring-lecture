@@ -15,11 +15,13 @@ import com.jjang051.comment.entity.Board;
 import com.jjang051.comment.service.BoardService;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 
 @RequestMapping("/board")
 @Controller
 @RequiredArgsConstructor
+@Slf4j
 public class BoardController {
   private final BoardService boardService;
   private String prefix = "/board";
@@ -46,6 +48,7 @@ public class BoardController {
   @GetMapping("/view/{id}")
   public String getView(@PathVariable("id") Long id,Model model) {
       Board board= boardService.getView(id);
+      log.info("commentList==={}",board.getCommentList().size());
       model.addAttribute("board", board);
       return prefix+"/view";
   }

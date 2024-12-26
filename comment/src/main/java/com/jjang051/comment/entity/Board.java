@@ -39,15 +39,10 @@ public class Board {
   @OneToMany(mappedBy = "board")   //1:N
   private List<Comment> commentList;
 
-  // @ManyToOne(fetch = FetchType.LAZY)
-  // @JoinColumn(name="writerId",referencedColumnName = "userId")
-  // private Member writer;
-
   @Builder
   public Board(String title,String content, LocalDateTime regDate) {
     this.title=title;
     this.content=content;
     this.regDate = regDate;
-    // this.writer = writer;
   }
 }

@@ -38,7 +38,28 @@
             </tr>
           </tbody>
         </table>
-
+        <div class="commentList mt-5">
+          <ul>
+            <th:block th:each="item:${board.commentList}">
+              <li>
+                <span th:text="${item.content}">내용이 들어갑니다.</span
+                ><span
+                  th:text="${#temporals.format(item.regDate,'yyyy/MM/dd HH:mm:ss (EE)')}"
+                  >2024/12/25 11:30:30</span
+                >
+              </li>
+            </th:block>
+            <!-- <li>
+              <span>내용이 들어갑니다.</span><span>2024/12/25 11:30:30</span>
+            </li>
+            <li>
+              <span>내용이 들어갑니다.</span><span>2024/12/25 11:30:30</span>
+            </li>
+            <li>
+              <span>내용이 들어갑니다.</span><span>2024/12/25 11:30:30</span>
+            </li> -->
+          </ul>
+        </div>
         <form
           th:action="@{|/comment/write/${board.id}|}"
           method="post"

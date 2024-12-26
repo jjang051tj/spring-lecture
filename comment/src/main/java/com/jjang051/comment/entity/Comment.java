@@ -12,11 +12,13 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AccessLevel;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name="comments")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Getter
 public class Comment {
 
   @Id
@@ -27,12 +29,9 @@ public class Comment {
 
   private LocalDateTime regDate;
 
-
-
   @ManyToOne
-  @JoinColumn(name = "boardId")
+  //@JoinColumn(name = "boardId")
   private Board board;
-
 
   @Builder
   public Comment(String content,LocalDateTime regDate, Board board) {

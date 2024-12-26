@@ -28,10 +28,9 @@ public class CommentController {
 
 
   @PostMapping("/write/{id}")
-  @ResponseBody
   public String write(@PathVariable("id") Long id, @RequestParam(name = "content") String content) {
     Board board = boardService.getView(id);
     commentService.write(content,board);
-    return "comment";
+    return "redirect:/board/view/"+id;
   }
 }
