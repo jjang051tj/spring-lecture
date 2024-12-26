@@ -1,12 +1,17 @@
 package com.jjang051.comment.controller;
 
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.jjang051.comment.entity.Board;
 import com.jjang051.comment.service.BoardService;
 
 import lombok.RequiredArgsConstructor;
@@ -30,4 +35,21 @@ public class BoardController {
       boardService.write(title,content);
       return prefix+"/list";
   }
+
+  @GetMapping("/list")
+  public String getList(Model model) {
+
+    List<Board> boardList = boardService.getList();
+    model.addAttribute("boardList", boardList);
+    return prefix+"/list";
+  }
+
+  @GetMapping("/view/{id}")
+  public String getView(@PathVariable("id") Long id,Model model) {
+      Board board= boardService.getView(id);
+      model.addAttribute("board", board);
+      return prefix+"/view";
+  }
+  
+  
 }
