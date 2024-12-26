@@ -7,6 +7,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -26,8 +28,15 @@ public class Comment {
   private LocalDateTime regDate;
 
 
+
+  @ManyToOne
+  @JoinColumn(name = "boardId")
+  private Board board;
+
+
   @Builder
-  public Comment(String content,LocalDateTime regDate) {
+  public Comment(String content,LocalDateTime regDate, Board board) {
+    this.board = board;
     this.content= content;
     this.regDate=regDate;
   }
