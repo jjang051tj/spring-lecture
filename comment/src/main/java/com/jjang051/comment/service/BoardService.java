@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.jjang051.comment.entity.Board;
@@ -30,7 +31,8 @@ public class BoardService {
   }
 
   public List<Board> getList() {
-    return boardRepository.findAll();
+    Sort sort = Sort.by(Sort.Order.desc("id"));
+    return boardRepository.findAll(sort);
   }
 
   public Board getView(Long id) {

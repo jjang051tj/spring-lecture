@@ -14,7 +14,7 @@
         <div class="col-md-3 text-end">
             <a href="../member/login" class="btn btn-outline-primary">Login</a>
             <a href="../member/signup" class="btn btn-primary">Sign-up</a>
-            <a href="../board/list" class="btn btn-primary">Board</a>
+            <a href="../board/list"  th:href="@{|/board/list|}"  class="btn btn-primary">Board</a>
         </div>
     </th:block>
     <th:block th:unless="${session.loggedMemberDto == null}">
@@ -26,7 +26,7 @@
                 <img th:src="@{|/upload/${session.loggedMemberDto.renameProfile}|}" src="https://img2.daumcdn.net/thumb/R658x0.q70/?fname=https://t1.daumcdn.net/news/202412/20/joongang/20241220050110390gvuf.jpg">
             </a>
             <a href="../member/logout" class="btn btn-primary">Logout</a>
-            <a href="../board/list" class="btn btn-primary">Board</a>
+            <a href="../board/list" th:href="@{|/board/list|}" class="btn btn-primary">Board</a>
         </div>
     </th:block>
 </header>

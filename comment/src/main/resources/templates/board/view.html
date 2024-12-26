@@ -38,6 +38,21 @@
             </tr>
           </tbody>
         </table>
+
+        <form th:action="@{|/board/write|}" method="post" class="mt-5">
+          <div class="mb-3">
+            <label for="content" class="form-label fw-bold">COMMENT</label>
+            <textarea
+              class="form-control"
+              id="content"
+              rows="3"
+              name="content"
+            ></textarea>
+          </div>
+          <div class="mt-3">
+            <button class="btn btn-primary">COMMENT</button>
+          </div>
+        </form>
       </main>
       <footer th:replace="~{fragments/footer}"></footer>
     </div>
