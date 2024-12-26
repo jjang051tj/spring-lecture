@@ -22,7 +22,6 @@ import lombok.Setter;
 @Entity
 @Table(name = "board_comments")
 @Getter
-//@Setter 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Board {
 

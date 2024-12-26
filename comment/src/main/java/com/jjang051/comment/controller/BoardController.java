@@ -48,7 +48,7 @@ public class BoardController {
   @GetMapping("/view/{id}")
   public String getView(@PathVariable("id") Long id,Model model) {
       Board board= boardService.getView(id);
-      log.info("commentList==={}",board.getCommentList().size());
+      //log.info("commentList==={}",board.getCommentList().size());
       model.addAttribute("board", board);
       return prefix+"/view";
   }

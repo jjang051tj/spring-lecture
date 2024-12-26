@@ -39,14 +39,24 @@
           </tbody>
         </table>
         <div class="commentList mt-5">
+          <p
+            class="text-end"
+            th:text="|${board.commentList.size()}개의 댓글이 있습니다.|"
+          ></p>
           <ul>
             <th:block th:each="item:${board.commentList}">
-              <li>
-                <span th:text="${item.content}">내용이 들어갑니다.</span
-                ><span
-                  th:text="${#temporals.format(item.regDate,'yyyy/MM/dd HH:mm:ss (EE)')}"
-                  >2024/12/25 11:30:30</span
-                >
+              <li class="d-flex justify-content-between mb-2">
+                <div>
+                  <span th:text="${item.content}">내용이 들어갑니다.</span
+                  ><span
+                    th:text="${#temporals.format(item.regDate,'yyyy/MM/dd HH:mm:ss (EE)')}"
+                    >2024/12/25 11:30:30</span
+                  >
+                </div>
+                <div>
+                  <button class="btn btn-sm btn-primary">MODIFY</button>
+                  <button class="btn btn-sm btn-danger ml-2">DEL</button>
+                </div>
               </li>
             </th:block>
             <!-- <li>

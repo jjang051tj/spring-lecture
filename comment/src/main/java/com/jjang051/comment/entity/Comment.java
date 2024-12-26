@@ -30,7 +30,7 @@ public class Comment {
   private LocalDateTime regDate;
 
   @ManyToOne
-  //@JoinColumn(name = "boardId")
+  @JoinColumn(name = "boardId")
   private Board board;
 
   @Builder
