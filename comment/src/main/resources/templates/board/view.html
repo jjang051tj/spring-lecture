@@ -43,13 +43,15 @@
             class="text-end"
             th:text="|${board.commentList.size()}개의 댓글이 있습니다.|"
           ></p>
-          <ul>
+          <ul id="comment-list">
+            <!-- <span th:text="${#temporals.createNow()}"></span> -->
             <th:block th:each="item:${board.commentList}">
               <li class="d-flex justify-content-between mb-2">
                 <div>
                   <span th:text="${item.content}">내용이 들어갑니다.</span
                   ><span
-                    th:text="${#temporals.format(item.regDate,'yyyy/MM/dd HH:mm:ss (EE)')}"
+                    th:if="${item.regDate.equals(#temporals.createNow())}"
+                    th:text="${#temporals.format(item.regDate,'yyyy/MM/dd')}"
                     >2024/12/25 11:30:30</span
                   >
                 </div>
@@ -91,17 +93,19 @@
             ></textarea>
           </div>
           <div class="mt-3">
-            <button class="btn btn-primary">COMMENT</button>
+            <button class="btn btn-primary" id="btn-comment">COMMENT</button>
           </div>
         </form>
       </main>
       <footer th:replace="~{fragments/footer}"></footer>
     </div>
 
-    <script>
+    <script th:inline="javascript">
       const btnDels = document.querySelectorAll(".btn-del");
+      const commentList = document.querySelector("#comment-list");
       btnDels.forEach((item) => {
         item.addEventListener("click", (e) => {
+          console.log(this);
           e.preventDefault();
           console.log(e.currentTarget.dataset.id);
           const _this = e.currentTarget;
@@ -117,6 +121,38 @@
               });
           }
         });
+      });
+      const sendURL =
+        /*[[|/comment/write-ajax/${board.id}|]]*/ "/comment/write-ajax/3";
+      const btnComment = document.querySelector("#btn-comment");
+      const contentBox = document.querySelector("#content");
+      btnComment.addEventListener("click", (e) => {
+        const sendData = { content: contentBox.value };
+        console.log(sendData);
+        e.preventDefault();
+        fetch(sendURL, {
+          method: "post",
+          headers: { "Content-Type": "application/json;charset=UTF-8" },
+          body: JSON.stringify(sendData),
+        })
+          .then((response) => response.json())
+          .then((json) => {
+            console.log(json);
+            if (json.isInsert === "ok") {
+              console.log("데이터 들어갔음");
+              commentList.innerHTML += `<li class="d-flex justify-content-between mb-2">
+                <div>
+                  <span>${json.insertComment.content}</span><span>${json.insertComment.regDate}</span>
+                </div>
+                <div>
+                  <button class="btn btn-sm btn-primary">MODIFY</button>
+                  <button class="btn btn-sm btn-danger ml-2 btn-del" data-id="${json.insertComment.id}">
+                    <span>DEL</span>
+                  </button>
+                </div>
+              </li>`;
+            }
+          });
       });
     </script>
   </body>

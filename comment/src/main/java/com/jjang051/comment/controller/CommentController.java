@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jjang051.comment.entity.Board;
+import com.jjang051.comment.entity.Comment;
 import com.jjang051.comment.service.BoardService;
 import com.jjang051.comment.service.CommentService;
 
@@ -41,6 +42,21 @@ public class CommentController {
     commentService.write(content,board);
     return "redirect:/board/view/"+id;
   }
+
+
+  @PostMapping("/write-ajax/{id}")
+  @ResponseBody
+  public Map<String, Object> writeAjax(@PathVariable("id") Long id, @RequestBody Comment comment) {
+    log.info("comment==={}",comment.getContent());
+    Board board = boardService.getView(id);
+    Comment insertComment = commentService.write(comment.getContent(),board);
+    Map<String, Object> resultMap =  new HashMap<>();
+    resultMap.put("isInsert", "ok");
+    resultMap.put("insertComment", insertComment);
+    return resultMap;
+  }
+  
+  
   //get, post, delete, patch, put
   @DeleteMapping("/delete/{id}")
   @ResponseBody

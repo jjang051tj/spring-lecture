@@ -16,16 +16,19 @@ import lombok.RequiredArgsConstructor;
 public class CommentService {
   private final CommentRepository commentRepository;
 
-  public void write(String content, Board board) {
+  public Comment write(String content, Board board) {
     Comment comment = Comment.builder()
     .board(board)
     .content(content)
     .regDate(LocalDateTime.now())
     .build();
-    commentRepository.save(comment);
+    return commentRepository.save(comment);
   }
 
   public void delete(Long id) {
     commentRepository.deleteById(id);
+  }
+  public Comment getComment(Long id) {
+    return commentRepository.findById(id).get();
   }
 }
