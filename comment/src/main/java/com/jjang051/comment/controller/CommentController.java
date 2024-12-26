@@ -1,5 +1,8 @@
 package com.jjang051.comment.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.swing.border.Border;
 
 import org.springframework.stereotype.Controller;
@@ -15,6 +18,9 @@ import com.jjang051.comment.service.BoardService;
 import com.jjang051.comment.service.CommentService;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 
 
@@ -22,7 +28,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/comment")
-
+@Slf4j
 public class CommentController {
 
   private final CommentService commentService;
@@ -35,11 +41,15 @@ public class CommentController {
     commentService.write(content,board);
     return "redirect:/board/view/"+id;
   }
-
-  @GetMapping("/delete/{id}")
-  public String dlete(@PathVariable("id") Long id) {
+  //get, post, delete, patch, put
+  @DeleteMapping("/delete/{id}")
+  @ResponseBody
+  public Map<String,String> dlete(@PathVariable("id") Long id) {
+      log.info("id==={}",id);
       commentService.delete(id);
-      return new String();
+      Map<String, String> resultMap =  new HashMap<>();
+      resultMap.put("isDelete", "ok");
+      return resultMap;
   }
   
 }
