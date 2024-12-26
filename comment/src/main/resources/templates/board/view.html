@@ -55,7 +55,13 @@
                 </div>
                 <div>
                   <button class="btn btn-sm btn-primary">MODIFY</button>
-                  <button class="btn btn-sm btn-danger ml-2">DEL</button>
+                  <button
+                    class="btn btn-sm btn-danger ml-2 btn-del"
+                    data-id="1"
+                    th:data-id="${item.id}"
+                  >
+                    <span>DEL</span>
+                  </button>
                 </div>
               </li>
             </th:block>
@@ -91,5 +97,15 @@
       </main>
       <footer th:replace="~{fragments/footer}"></footer>
     </div>
+
+    <script>
+      const btnDels = document.querySelectorAll(".btn-del");
+      btnDels.forEach((item) => {
+        item.addEventListener("click", (e) => {
+          e.preventDefault();
+          console.log(e.currentTarget.dataset.id);
+        });
+      });
+    </script>
   </body>
 </html>
