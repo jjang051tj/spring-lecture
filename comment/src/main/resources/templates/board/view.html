@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+  <head th:replace="~{fragments/head::myHead('WRITE')}"></head>
+  <body>
+    <div class="container">
+      <header th:replace="~{fragments/header}"></header>
+      <main>
+        <h2 class="my-5 fw-bold">LIST</h2>
+        <table class="table">
+          <colgroup>
+            <col style="width: 10%" />
+            <col style="width: 40%" />
+            <col style="width: 10%" />
+            <col style="width: 40%" />
+          </colgroup>
+          <tbody>
+            <tr>
+              <th>TITLE</th>
+              <td colspan="3" th:text="${board.title}">제목</td>
+            </tr>
+            <tr>
+              <th>WRITER</th>
+              <td colspan="3" th:text="아무개">제목</td>
+            </tr>
+            <tr>
+              <th>DATE</th>
+              <td
+                th:text="${#temporals.format(board.regDate,'yyyy/MM/dd HH:mm:ss (EE)')}"
+              >
+                20204/12/26 09:57:30
+              </td>
+              <th>HIT</th>
+              <td th:text="1">20204/12/26 09:57:30</td>
+            </tr>
+            <tr>
+              <th>CONTENT</th>
+              <td colspan="3" th:text="${board.content}">내용</td>
+            </tr>
+          </tbody>
+        </table>
+      </main>
+      <footer th:replace="~{fragments/footer}"></footer>
+    </div>
+  </body>
+</html>

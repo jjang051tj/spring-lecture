@@ -3,6 +3,7 @@ package com.jjang051.comment.service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -30,5 +31,13 @@ public class BoardService {
 
   public List<Board> getList() {
     return boardRepository.findAll();
+  }
+
+  public Board getView(Long id) {
+    Optional<Board> optionalBoard = boardRepository.findById(id);
+    if(optionalBoard.isPresent()) {
+      return optionalBoard.get();
+    }
+    return null;
   }
 }
