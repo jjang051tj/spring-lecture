@@ -8,9 +8,13 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name="comments")
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Comment {
 
   @Id
@@ -20,4 +24,11 @@ public class Comment {
   private String content;
 
   private LocalDateTime regDate;
+
+
+  @Builder
+  public Comment(String content,LocalDateTime regDate) {
+    this.content= content;
+    this.regDate=regDate;
+  }
 }

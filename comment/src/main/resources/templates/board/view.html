@@ -39,7 +39,11 @@
           </tbody>
         </table>
 
-        <form th:action="@{|/board/write|}" method="post" class="mt-5">
+        <form
+          th:action="@{|/comment/write/${board.id}|}"
+          method="post"
+          class="mt-5"
+        >
           <div class="mb-3">
             <label for="content" class="form-label fw-bold">COMMENT</label>
             <textarea
