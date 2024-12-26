@@ -15,6 +15,8 @@ import com.jjang051.comment.service.BoardService;
 import com.jjang051.comment.service.CommentService;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.GetMapping;
+
 
 
 @Controller
@@ -33,4 +35,11 @@ public class CommentController {
     commentService.write(content,board);
     return "redirect:/board/view/"+id;
   }
+
+  @GetMapping("/delete/{id}")
+  public String dlete(@PathVariable("id") Long id) {
+      commentService.delete(id);
+      return new String();
+  }
+  
 }
