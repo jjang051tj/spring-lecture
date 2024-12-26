@@ -30,10 +30,9 @@ public class BoardController {
   }
 
   @PostMapping("/write")
-  @ResponseBody
   public String write(@RequestParam(name = "title") String title,@RequestParam(name = "content") String content) {
       boardService.write(title,content);
-      return prefix+"/list";
+      return "redirect:/board/list";
   }
 
   @GetMapping("/list")

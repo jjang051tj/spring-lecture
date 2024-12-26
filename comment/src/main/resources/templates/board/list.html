@@ -18,7 +18,7 @@
           </thead>
           <tbody>
             <tr th:each="item:${boardList}">
-              <td th:text="${item.id}">1</td>
+              <td th:text="${itemStat.size+1 - itemStat.count}">1</td>
               <td>
                 <a
                   href=""
@@ -37,6 +37,11 @@
             </tr>
           </tbody>
         </table>
+        <div class="mt-5 d-flex justify-content-center">
+          <a href="" th:href="@{|/board/write|}" class="btn btn-primary"
+            >WRITE</a
+          >
+        </div>
       </main>
       <footer th:replace="~{fragments/footer}"></footer>
     </div>
