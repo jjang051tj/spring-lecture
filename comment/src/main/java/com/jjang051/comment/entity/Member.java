@@ -13,12 +13,14 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Table(name = "member_comment")
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
 public class Member {
 
   @Id
@@ -34,6 +36,8 @@ public class Member {
   private String userEmail;
 
   private String password;
+
+  private String role;
 
   private LocalDateTime regDate;
 
