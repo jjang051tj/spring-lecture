@@ -38,6 +38,9 @@ public class Board {
   @OneToMany(mappedBy = "board")   //1:N
   private List<Comment> commentList;
 
+  @ManyToOne
+  private Member writer;
+
   @Builder
   public Board(String title,String content, LocalDateTime regDate) {
     this.title=title;

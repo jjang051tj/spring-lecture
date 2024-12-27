@@ -33,8 +33,11 @@ public class Comment {
 
   @ManyToOne
   @JoinColumn(name = "boardId")
-  //@JsonIgnore
+  @JsonIgnore
   private Board board;
+
+  @ManyToOne
+  private Member writer;
 
   @Builder
   public Comment(String content,LocalDateTime regDate, Board board) {

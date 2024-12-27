@@ -37,8 +37,11 @@ public class Member {
 
   private LocalDateTime regDate;
 
-  // @OneToMany(mappedBy = "writer", fetch = FetchType.LAZY)
-  // private List<Board> boardList;
+  @OneToMany
+  private List<Board> boardList;
+
+  @OneToMany
+  private List<Comment> commentList;
 
   @Builder
   public Member(String userId,String userName, String userEmail, String password, LocalDateTime regDate) {
