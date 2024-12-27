@@ -25,7 +25,7 @@ public class SecurityConfig {
         .loginPage("/member/login")
         .usernameParameter("userId")
         .loginProcessingUrl("/member/login")
-        .defaultSuccessUrl("/",true)
+        .defaultSuccessUrl("/")
         .permitAll()
       )
       .logout(
@@ -33,7 +33,8 @@ public class SecurityConfig {
         .logoutRequestMatcher(new AntPathRequestMatcher("/member/logout"))
         .logoutSuccessUrl("/")
         .invalidateHttpSession(true)
-      );
+      )
+      .csrf((auth)->auth.disable());
       return httpSecurity.build();
   }
 }

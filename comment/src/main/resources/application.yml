@@ -30,6 +30,11 @@ spring:
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
 
+  # security:
+  #   user:
+  #     name: hong
+  #     password: 1234
+
 logging:
   level:
     org:

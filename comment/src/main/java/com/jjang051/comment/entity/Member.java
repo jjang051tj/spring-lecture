@@ -41,6 +41,7 @@ public class Member {
 
   private LocalDateTime regDate;
 
+
   @OneToMany
   private List<Board> boardList;
 
@@ -48,12 +49,13 @@ public class Member {
   private List<Comment> commentList;
 
   @Builder
-  public Member(String userId,String userName, String userEmail, String password, LocalDateTime regDate) {
+  public Member(String userId,String userName, String userEmail, String password, LocalDateTime regDate, String role) {
     this.userId=userId;
     this.userName = userName;
     this.userEmail = userEmail;
     this.password = password;
     this.regDate = regDate;
+    this.role=role;
     //this.boardList = boardList;
   }
 }

@@ -30,6 +30,8 @@ public class MemberDto {
   private LocalDateTime regDate;
   private String role;
 
+
+  
   public static MemberDto fromEntity(Member member) {
     return MemberDto.builder()
           .userId(member.getUserId())
