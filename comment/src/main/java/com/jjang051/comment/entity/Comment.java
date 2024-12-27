@@ -2,6 +2,8 @@ package com.jjang051.comment.entity;
 
 import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.annotation.Generated;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -31,6 +33,7 @@ public class Comment {
 
   @ManyToOne
   @JoinColumn(name = "boardId")
+  //@JsonIgnore
   private Board board;
 
   @Builder

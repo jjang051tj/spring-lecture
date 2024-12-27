@@ -50,8 +50,7 @@
                 <div>
                   <span th:text="${item.content}">내용이 들어갑니다.</span
                   ><span
-                    th:if="${item.regDate.equals(#temporals.createNow())}"
-                    th:text="${#temporals.format(item.regDate,'yyyy/MM/dd')}"
+                    th:text="${#temporals.format(item.regDate,'yyyy/MM/dd HH:mm:ss')}"
                     >2024/12/25 11:30:30</span
                   >
                 </div>
@@ -103,25 +102,37 @@
     <script th:inline="javascript">
       const btnDels = document.querySelectorAll(".btn-del");
       const commentList = document.querySelector("#comment-list");
-      btnDels.forEach((item) => {
-        item.addEventListener("click", (e) => {
-          console.log(this);
-          e.preventDefault();
-          console.log(e.currentTarget.dataset.id);
-          const _this = e.currentTarget;
-          const id = _this.dataset.id;
-          if (confirm("삭제하시겠습니까?")) {
-            fetch("/comment/delete/" + id, { method: "delete" })
-              .then((response) => response.json())
-              .then((json) => {
-                console.log(json);
-                if (json.isDelete === "ok") {
-                  _this.parentNode.parentNode.remove();
-                }
-              });
-          }
-        });
+      commentList.addEventListener("click", (e) => {
+        //console.log(e.target);
+        //console.log(e.currentTarget);
+        //console.log(e.target.closest("button"));
+        const btnDel = e.target.closest("button");
+        // if (btnDel.dataset.id != undefined) {
+        //   console.log(btnDel.dataset.id);
+        // }
+        if (btnDel.classList.contains("btn-del")) {
+          console.log(btnDel.dataset.id);
+        }
       });
+      // btnDels.forEach((item) => {
+      //   item.addEventListener("click", (e) => {
+      //     console.log(this);
+      //     e.preventDefault();
+      //     console.log(e.currentTarget.dataset.id);
+      //     const _this = e.currentTarget;
+      //     const id = _this.dataset.id;
+      //     if (confirm("삭제하시겠습니까?")) {
+      //       fetch("/comment/delete/" + id, { method: "delete" })
+      //         .then((response) => response.json())
+      //         .then((json) => {
+      //           console.log(json);
+      //           if (json.isDelete === "ok") {
+      //             _this.parentNode.parentNode.remove();
+      //           }
+      //         });
+      //     }
+      //   });
+      // });
       const sendURL =
         /*[[|/comment/write-ajax/${board.id}|]]*/ "/comment/write-ajax/3";
       const btnComment = document.querySelector("#btn-comment");
@@ -140,6 +151,7 @@
             console.log(json);
             if (json.isInsert === "ok") {
               console.log("데이터 들어갔음");
+              contentBox.value = "";
               commentList.innerHTML += `<li class="d-flex justify-content-between mb-2">
                 <div>
                   <span>${json.insertComment.content}</span><span>${json.insertComment.regDate}</span>
