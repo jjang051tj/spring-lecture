@@ -7,14 +7,18 @@ import com.jjang051.comment.entity.Board;
 import com.jjang051.comment.entity.Comment;
 import com.jjang051.comment.entity.Member;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
 
 @Getter
 @Setter
+@NoArgsConstructor
 public class BoardDto {
   
   private Long id;

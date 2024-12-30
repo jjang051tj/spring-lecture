@@ -38,27 +38,27 @@ public class BoardController {
       return prefix+"/write";
   }
 
-  @PostMapping("/write")
-  public String write(@RequestParam(name = "title") String title,
-                      @RequestParam(name = "content") String content,
-                      @AuthenticationPrincipal CustomUserDetails customUserDetails
-                      ) {
-      boardService.write(title,content,customUserDetails.getLoggedMember());
-      return "redirect:/board/list";
-  }
-
-
-
   // @PostMapping("/write")
-  // @ResponseBody
-  // public String write(@ModelAttribute BoardDto boardDto,
+  // public String write(@RequestParam(name = "title") String title,
+  //                     @RequestParam(name = "content") String content,
   //                     @AuthenticationPrincipal CustomUserDetails customUserDetails
   //                     ) {
-  //     boardDto.setWriter(customUserDetails.getLoggedMember());
-  //     log.info("boardDto==={}",boardDto.toString());
-  //     boardService.write(boardDto);
+  //     boardService.write(title,content,customUserDetails.getLoggedMember());
   //     return "redirect:/board/list";
   // }
+
+
+
+  @PostMapping("/write")
+  //@ResponseBody
+  public String write(@ModelAttribute BoardDto boardDto,
+                      @AuthenticationPrincipal CustomUserDetails customUserDetails
+                      ) {
+      boardDto.setWriter(customUserDetails.getLoggedMember());
+      log.info("boardDto==={}",boardDto.toString());
+      boardService.write(boardDto);
+      return "redirect:/board/list";
+  }
 
   @GetMapping("/list")
   public String getList(Model model) {

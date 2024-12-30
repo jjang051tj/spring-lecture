@@ -24,6 +24,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "board_comments")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
 public class Board {
 
   @Id
