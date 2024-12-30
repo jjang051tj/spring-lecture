@@ -1,0 +1,40 @@
+<html xmlns:th="http://thymeleaf.org">
+  <head th:replace="~{fragments/head.html::myHead('INFO')}"></head>
+  <body>
+    <div class="container">
+      <header th:replace="~{fragments/header}"></header>
+      <main>
+        <h2 class="mt-5 mb-5">INFO</h2>
+        <table class="table table-striped">
+          <tbody>
+            <tr>
+              <th>USERID</th>
+              <td
+                th:text="${#authentication.principal.loggedMember.userId}"
+              ></td>
+            </tr>
+            <tr>
+              <th>USER NAME</th>
+              <td
+                th:text="${#authentication.principal.loggedMember.userName}"
+              ></td>
+            </tr>
+            <tr>
+              <th>USER EMAIL</th>
+              <td
+                th:text="${#authentication.principal.loggedMember.userEmail}"
+              ></td>
+            </tr>
+            <tr>
+              <th>REGISTRATION DATE</th>
+              <td
+                th:text="${#authentication.principal.loggedMember.regDate}"
+              ></td>
+            </tr>
+          </tbody>
+        </table>
+      </main>
+      <footer th:replace="~{fragments/footer}"></footer>
+    </div>
+  </body>
+</html>

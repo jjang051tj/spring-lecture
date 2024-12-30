@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.annotation.Generated;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -31,18 +32,20 @@ public class Comment {
 
   private LocalDateTime regDate;
 
-  @ManyToOne
+  @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "boardId")
   @JsonIgnore
   private Board board;
 
   @ManyToOne
+  @JoinColumn(name="writerId",referencedColumnName = "userId")
   private Member writer;
 
   @Builder
-  public Comment(String content,LocalDateTime regDate, Board board) {
+  public Comment(String content,LocalDateTime regDate, Board board, Member writer) {
     this.board = board;
     this.content= content;
     this.regDate=regDate;
+    this.writer = writer;
   }
 }

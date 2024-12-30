@@ -1,5 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://thymeleaf.org">
+<html
+  lang="en"
+  xmlns:th="http://thymeleaf.org"
+  xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+>
   <head th:replace="~{fragments/head::myHead('WRITE')}"></head>
   <body>
     <div class="container">
@@ -27,7 +31,7 @@
                   >제목을 씁니다.</a
                 >
               </td>
-              <td>아무개</td>
+              <td th:text="${item.writer.userName}">아무개</td>
               <td
                 th:text="${#temporals.format(item.regDate,'yyyy/MM/dd HH:mm:ss (EE)')}"
               >
@@ -37,7 +41,10 @@
             </tr>
           </tbody>
         </table>
-        <div class="mt-5 d-flex justify-content-center">
+        <div
+          class="mt-5 d-flex justify-content-center"
+          sec:authorize="isAuthenticated()"
+        >
           <a href="" th:href="@{|/board/write|}" class="btn btn-primary"
             >WRITE</a
           >

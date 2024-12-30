@@ -8,27 +8,38 @@ import java.util.Optional;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import com.jjang051.comment.dto.BoardDto;
 import com.jjang051.comment.entity.Board;
 import com.jjang051.comment.entity.Member;
 import com.jjang051.comment.repository.BoardRepository;
 
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class BoardService {
 
   private final BoardRepository boardRepository;
 
-  public void write(String title,String content) {
-    Board board = Board.builder()
-                  .title(title)
-                  .content(content)
-                  .regDate(LocalDateTime.now())
-                  .build();
+  public void write(BoardDto boardDto) {
+    Board board = BoardDto.toEntity(boardDto);
     boardRepository.save(board); // insert 
   }
+
+  public void write(String title,String content,Member writer) {
+    Board board = Board.builder()
+      .title(title)
+      .content(content)
+      .regDate(LocalDateTime.now())
+      .writer(writer)
+      .build();
+    boardRepository.save(board); // insert 
+  }
+ 
+
 
   public List<Board> getList() {
     Sort sort = Sort.by(Sort.Order.desc("id"));

@@ -17,7 +17,7 @@ public class SecurityConfig {
   public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
     httpSecurity.authorizeHttpRequests(
       (auth)->auth
-      .requestMatchers("/","/member/signin","/member/login","/css/**","/images/**","/js/**")
+      .requestMatchers("/","/member/signin","/member/login","/board/list","/board/view/**","/css/**","/images/**","/js/**")
       .permitAll()
       .anyRequest()
       .authenticated()
@@ -28,7 +28,7 @@ public class SecurityConfig {
         .usernameParameter("userId")
         //.passwordParameter("userPw")
         .loginProcessingUrl("/member/login")
-        .defaultSuccessUrl("/")
+        .defaultSuccessUrl("/",true)
         .permitAll()
       )
       .logout(

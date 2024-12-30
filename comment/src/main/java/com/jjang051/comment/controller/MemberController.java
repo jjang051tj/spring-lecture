@@ -42,6 +42,12 @@ public class MemberController {
       return prefix+"/login";
   }
 
+  @GetMapping("/info")
+  public String info() {
+      return prefix+"/info";
+  }
+  
+
   // @PostMapping("/login")
   // public String login() {
   //     return prefix+"/login";
