@@ -8,21 +8,23 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import com.jjang051.comment.entity.Member;
 
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
-//@RequiredArgsConstructor
+@RequiredArgsConstructor
+@Getter
 public class CustomUserDetails implements UserDetails {
 
   private final Member loggedMember;
-  public CustomUserDetails(Member loggedMember) {
-    this.loggedMember = loggedMember;
-  }
+  // public CustomUserDetails(Member loggedMember) {
+  //   this.loggedMember = loggedMember;
+  // }
 
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {
     Collection<GrantedAuthority> collection = new ArrayList<>();
     collection.add(new GrantedAuthority() {
-
+      
       @Override
       public String getAuthority() {
         return loggedMember.getRole();

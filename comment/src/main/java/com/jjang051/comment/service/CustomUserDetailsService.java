@@ -22,13 +22,15 @@ public class CustomUserDetailsService implements UserDetailsService {
   private final MemberRepository memberRepository;
 
 
+  //runtime 오류 
+
   @Override
   public UserDetails loadUserByUsername(String userId) throws UsernameNotFoundException {
     Optional<Member> loggedMember = memberRepository.findByUserId(userId);
     if(loggedMember.isPresent()) {
       return new CustomUserDetails(loggedMember.get());
-    }
-    throw new UsernameNotFoundException("아이디 패스워드 확인해 주세요.");
+    } 
+    throw new UsernameNotFoundException("아이디 패스워드 확인해 주세요."); //예외 던지기
   }
 
 }

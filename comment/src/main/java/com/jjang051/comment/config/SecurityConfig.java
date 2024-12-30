@@ -11,6 +11,8 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @EnableWebSecurity
 public class SecurityConfig {
 
+  //스프링 부트 3 람다식으로 변경
+
   @Bean
   public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
     httpSecurity.authorizeHttpRequests(
@@ -34,8 +36,8 @@ public class SecurityConfig {
         .logoutRequestMatcher(new AntPathRequestMatcher("/member/logout"))
         .logoutSuccessUrl("/")
         .invalidateHttpSession(true)
-      );
-      //.csrf((auth)->auth.disable());
+      )
+      .csrf((auth)->auth.disable());  //front에서 토큰 가지고 접근  jwt  리액트 vue에서 접근할때
       return httpSecurity.build();
   }
 }

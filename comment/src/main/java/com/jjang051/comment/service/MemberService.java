@@ -26,7 +26,7 @@ public class MemberService {
                     .userId(memberDto.getUserId())
                     .userName(memberDto.getUserName())
                     .userEmail(memberDto.getUserEmail())
-                    .role("ROLE_USER")
+                    .role("ROLE_USER")     
                     .password(bCryptPasswordEncoder.encode(memberDto.getPassword()))
                     .regDate(LocalDateTime.now())
                     .build();
