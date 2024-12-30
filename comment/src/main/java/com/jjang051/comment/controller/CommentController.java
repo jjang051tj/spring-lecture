@@ -5,6 +5,7 @@ import java.util.Map;
 
 import javax.swing.border.Border;
 
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.jjang051.comment.dto.CustomUserDetails;
 import com.jjang051.comment.entity.Board;
 import com.jjang051.comment.entity.Comment;
 import com.jjang051.comment.service.BoardService;
@@ -37,9 +39,12 @@ public class CommentController {
 
 
   @PostMapping("/write/{id}")
-  public String write(@PathVariable("id") Long id, @RequestParam(name = "content") String content) {
+  public String write(@PathVariable("id") Long id, 
+                      @RequestParam(name = "content") String content,
+                      @AuthenticationPrincipal CustomUserDetails customUserDetails
+                      ) {
     Board board = boardService.getView(id);
-    commentService.write(content,board);
+    commentService.write(content,board,customUserDetails.getLoggedMember());
     return "redirect:/board/view/"+id;
   }
 

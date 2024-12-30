@@ -54,9 +54,12 @@
                     th:text="${#temporals.format(item.regDate,'yyyy/MM/dd HH:mm:ss')}"
                     >2024/12/25 11:30:30</span
                   >
+                  <span th:text="${item.writer.userName}"></span>
                 </div>
 
-                <div>
+                <div
+                  th:if="${item.writer.userId==#authentication.principal.loggedMember.userId}"
+                >
                   <button class="btn btn-sm btn-primary">MODIFY</button>
                   <button
                     class="btn btn-sm btn-danger ml-2 btn-del"
@@ -155,7 +158,7 @@
       btnComment.addEventListener("click", (e) => {
         const sendData = { content: contentBox.value };
         console.log(sendData);
-        e.preventDefault();
+        //e.preventDefault();
         fetch(sendURL, {
           method: "post",
           headers: { "Content-Type": "application/json;charset=UTF-8" },
