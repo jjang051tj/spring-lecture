@@ -51,10 +51,10 @@ public class Member {
   private String tel;
 
 
-  @OneToMany(mappedBy = "writer", fetch = FetchType.EAGER)
+  @OneToMany(mappedBy = "writer", fetch = FetchType.LAZY)
   private List<Board> boardList;
 
-  @OneToMany(mappedBy = "writer", fetch = FetchType.EAGER)
+  @OneToMany(mappedBy = "writer", fetch = FetchType.LAZY)
   private List<Comment> commentList;
 
   @Builder

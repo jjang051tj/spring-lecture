@@ -1,12 +1,14 @@
 package com.jjang051.comment.service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.jjang051.comment.dto.MemberDto;
+import com.jjang051.comment.entity.Board;
 import com.jjang051.comment.entity.Member;
 import com.jjang051.comment.repository.MemberRepository;
 
@@ -69,5 +71,9 @@ public class MemberService {
       } 
     }
     return null;
+  }
+
+  public List<Board> findAllBoards(String userId) {
+    return memberRepository.findAllBoards(userId);
   }
 }

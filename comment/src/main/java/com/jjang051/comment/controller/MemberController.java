@@ -1,6 +1,8 @@
 package com.jjang051.comment.controller;
 
 
+import java.util.List;
+
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.jjang051.comment.dto.CustomUserDetails;
 import com.jjang051.comment.dto.MemberDto;
+import com.jjang051.comment.entity.Board;
 import com.jjang051.comment.entity.Member;
 import com.jjang051.comment.service.MemberService;
 
@@ -69,8 +72,12 @@ public class MemberController {
 
   @GetMapping("/board")
   public String board(Model model,@AuthenticationPrincipal CustomUserDetails customUserDetails) {
-    log.info("boardList==={}",customUserDetails.getLoggedMember().getBoardList());
-    model.addAttribute("boardList", customUserDetails.getLoggedMember().getBoardList());
+    List<Board> boardList= memberService.findAllBoards(customUserDetails.getLoggedMember().getUserId());
+    log.info("boardList==={}",boardList.get(0));
+    log.info("boardList==={}",boardList.get(1));
+    log.info("boardList==={}",boardList.get(2));
+    
+    model.addAttribute("boardList", boardList);
     return prefix+"/board";
   }
 
