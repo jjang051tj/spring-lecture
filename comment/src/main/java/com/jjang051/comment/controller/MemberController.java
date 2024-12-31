@@ -1,12 +1,15 @@
 package com.jjang051.comment.controller;
 
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.jjang051.comment.dto.MemberDto;
+import com.jjang051.comment.entity.Member;
 import com.jjang051.comment.service.MemberService;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,7 +33,7 @@ public class MemberController {
 
 
   @PostMapping("/signin")
-  public String signin(@ModelAttribute MemberDto memberDto) {
+  public String signin(@Valid @ModelAttribute MemberDto memberDto) {
       memberService.signIn(memberDto);
       return "redirect:/member/login";
   }
@@ -46,6 +49,22 @@ public class MemberController {
   public String info() {
       return prefix+"/info";
   }
+  @GetMapping("/modify")
+  public String modify() {
+    return prefix+"/modify";
+  }
+
+  @PostMapping("/modify")
+  public String modify(@ModelAttribute MemberDto memberDto) {
+    Member modifiedMember = memberService.modify(memberDto);
+    if(modifiedMember!=null) {
+        return "redirect:/";
+    }
+    return prefix+"/modify";
+  }
+
+  
+
   
 
   // @PostMapping("/login")

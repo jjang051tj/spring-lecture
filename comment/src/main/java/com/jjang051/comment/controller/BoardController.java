@@ -75,6 +75,23 @@ public class BoardController {
       model.addAttribute("board", board);
       return prefix+"/view";
   }
-  
-  
+
+  @GetMapping("/modify/{id}")
+  public String modify(@PathVariable("id") Long id,Model model) {
+      Board board= boardService.getView(id);
+      model.addAttribute("board", board);
+      return prefix+"/modify";
+  }
+
+
+  @PostMapping("/modify")
+  public String modify(@ModelAttribute BoardDto boardDto, 
+                       @AuthenticationPrincipal CustomUserDetails customUserDetails) {
+      boardDto.setWriter(customUserDetails.getLoggedMember());
+      Board modifiedBoard = boardService.modify(boardDto);
+      if(modifiedBoard!=null) {
+        return "redirect:"+prefix+"/modify"+"/"+boardDto.getId();
+      } 
+      return prefix+"/modify"+"/"+boardDto.getId();
+  }
 }

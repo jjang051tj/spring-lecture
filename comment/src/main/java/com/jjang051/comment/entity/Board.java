@@ -38,7 +38,7 @@ public class Board {
   private LocalDateTime regDate;
 
   @ManyToOne
-  //@JoinColumn(name="writerId",referencedColumnName = "userId")
+  @JoinColumn(name="writerId",referencedColumnName = "userId")
   private Member writer;
 
   @OneToMany(mappedBy = "board", cascade = CascadeType.REMOVE)   //1:N

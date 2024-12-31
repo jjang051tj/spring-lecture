@@ -23,6 +23,7 @@ import lombok.NoArgsConstructor;
 @Getter
 public class Member {
 
+  //더티체킹 
   @Id
   @GeneratedValue(strategy = GenerationType.SEQUENCE)
   private Long id;
@@ -41,6 +42,14 @@ public class Member {
 
   private LocalDateTime regDate;
 
+  private String zipcode;
+
+  private String addr01;
+
+  private String addr02;
+
+  private String tel;
+
 
   @OneToMany
   private List<Board> boardList;
@@ -49,13 +58,19 @@ public class Member {
   private List<Comment> commentList;
 
   @Builder
-  public Member(String userId,String userName, String userEmail, String password, LocalDateTime regDate, String role) {
+  public Member(String userId,String userName, String userEmail, String password, LocalDateTime regDate, String role, String zipcode, String addr01, String addr02, String tel, Long id) {
+    this.id= id;
     this.userId=userId;
     this.userName = userName;
     this.userEmail = userEmail;
     this.password = password;
     this.regDate = regDate;
     this.role=role;
+    this.zipcode=zipcode;
+    this.addr01=addr01;
+    this.addr02=addr02;
+    this.tel = tel;
+
     //this.boardList = boardList;
   }
 }

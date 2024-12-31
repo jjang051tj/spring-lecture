@@ -53,4 +53,18 @@ public class BoardService {
     }
     return null;
   }
+
+  public Board modify(BoardDto boardDto) {
+    Board board = Board.builder()
+                  .id(boardDto.getId())
+                  .title(boardDto.getTitle())
+                  .content(boardDto.getContent())
+                  .writer(boardDto.getWriter())
+                  .build();
+    Optional<Board> optionalBoard = boardRepository.findById(boardDto.getId());
+    if(optionalBoard.isPresent()) {
+      return boardRepository.save(board);
+    }
+    return null;
+  }
 }

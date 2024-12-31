@@ -26,6 +26,18 @@
               ></td>
             </tr>
             <tr>
+              <th>ZIPCODE</th>
+              <td
+                th:text="${#authentication.principal.loggedMember.zipcode}"
+              ></td>
+            </tr>
+            <tr>
+              <th>ADDRESS</th>
+              <td
+                th:text="${#authentication.principal.loggedMember.addr01 + ' / '+ #authentication.principal.loggedMember.addr02}"
+              ></td>
+            </tr>
+            <tr>
               <th>REGISTRATION DATE</th>
               <td
                 th:text="${#authentication.principal.loggedMember.regDate}"
@@ -33,6 +45,12 @@
             </tr>
           </tbody>
         </table>
+        <div class="mt-5 d-flex justify-content-center">
+          <a href="" th:href="@{/member/modify}" class="btn btn-primary"
+            >MODIFY</a
+          >
+          <a href="" class="btn btn-danger mx-2">DELETE</a>
+        </div>
       </main>
       <footer th:replace="~{fragments/footer}"></footer>
     </div>

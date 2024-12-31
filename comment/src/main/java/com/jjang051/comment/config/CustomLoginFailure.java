@@ -31,8 +31,9 @@ public class CustomLoginFailure extends SimpleUrlAuthenticationFailureHandler {
         } else {
           errorMsg = "알 수 없는 이유로 로그인이 되고 있지 않습니다, 잠시 후 다시 시도해 주세요.";
         }
-        errorMsg = URLEncoder.encode(errorMsg, "UTF-8");
+        errorMsg = URLEncoder.encode(errorMsg, "UTF-8"); //한글은 깨져서 넘어온다
         setDefaultFailureUrl("/member/login?error=true&errorMsg="+errorMsg);
+        //redirect되어서 넘어온다
         super.onAuthenticationFailure(request, response, exception);
 	    }
 

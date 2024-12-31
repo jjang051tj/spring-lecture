@@ -8,27 +8,27 @@
         <form
           action="../member/signup"
           method="post"
-          th:action="@{/member/signin}"
+          th:action="@{/member/modify}"
           enctype="multipart/form-data"
         >
+          <input
+            type="hidden"
+            name="id"
+            value="1"
+            th:value="${#authentication.principal.loggedMember.id}"
+          />
           <div class="mb-3">
             <label for="userId" class="form-label fw-bold fs-5">USER ID</label>
-            <div class="row g-2">
-              <div class="col-10">
-                <input
-                  type="text"
-                  class="form-control form-control"
-                  name="userId"
-                  id="userId"
-                  placeholder="USER ID"
-                />
-              </div>
-              <div class="col-2">
-                <button class="btn btn btn-primary w-100" id="btn-duplicate-id">
-                  아이디 중복 학인
-                </button>
-              </div>
-            </div>
+            <input
+              readonly
+              type="text"
+              class="form-control form-control"
+              name="userId"
+              id="userId"
+              placeholder="USER ID"
+              value="jjang051"
+              th:value="${#authentication.principal.loggedMember.userId}"
+            />
           </div>
           <div class="mb-3">
             <label for="userPw" class="form-label fw-bold fs-5">PASSWORD</label>
@@ -50,6 +50,8 @@
               name="userName"
               id="userName"
               placeholder="USER NAME"
+              value="장성호"
+              th:value="${#authentication.principal.loggedMember.userName}"
             />
           </div>
           <div class="mb-3">
@@ -62,6 +64,7 @@
                   name="userEmail"
                   id="userEmail"
                   placeholder="name@example.com"
+                  th:value="${#authentication.principal.loggedMember.userEmail}"
                 />
               </div>
               <div class="col-2">
@@ -84,6 +87,7 @@
                   name="zipcode"
                   id="zipcode"
                   placeholder="ZIPCODE"
+                  th:value="${#authentication.principal.loggedMember.zipcode}"
                 />
               </div>
               <div class="col-2">
@@ -101,6 +105,7 @@
               name="addr01"
               id="addr01"
               placeholder="ADDRESS"
+              th:value="${#authentication.principal.loggedMember.addr01}"
             />
           </div>
           <div class="mb-3">
@@ -113,16 +118,18 @@
               name="addr02"
               id="addr02"
               placeholder="ADDRESS"
+              th:value="${#authentication.principal.loggedMember.addr02}"
             />
           </div>
           <div class="mb-3">
-            <label for="tel" class="form-label fw-bold fs-5">TEL</label>
+            <label for="addr02" class="form-label fw-bold fs-5">TEL</label>
             <input
               type="text"
               class="form-control form-control"
               name="tel"
               id="tel"
               placeholder="TEL"
+              th:value="${#authentication.principal.loggedMember.tel}"
             />
           </div>
           <div class="mb-3">
