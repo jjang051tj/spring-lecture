@@ -60,16 +60,34 @@
                   type="text"
                   class="form-control form-control"
                   name="userEmail"
-                  id="userEmail"
+                  id="user-email"
                   placeholder="name@example.com"
+                />
+              </div>
+              <div class="col-2">
+                <button class="btn btn btn-primary w-100" id="btn-send-email">
+                  인증번호받기
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="mb-3 blind" id="email-confirm">
+            <div class="row g-2">
+              <div class="col-10">
+                <input
+                  type="text"
+                  class="form-control form-control"
+                  name="userEmailConfirm"
+                  id="user-email-confirm"
+                  placeholder="이메일 인증번호"
                 />
               </div>
               <div class="col-2">
                 <button
                   class="btn btn btn-primary w-100"
-                  id="btn-duplicate-email"
+                  id="btn-email-confirm"
                 >
-                  이메일 중복 학인
+                  이메일 인증
                 </button>
               </div>
             </div>
@@ -143,24 +161,38 @@
       <footer th:replace="~{fragments/footer}"></footer>
     </div>
     <script>
-      const btnDuplicateId = document.querySelector("#btn-duplicate-id");
-      const userId = document.querySelector("#userId");
-      btnDuplicateId.addEventListener("click", (e) => {
+      const btnSendEmail = document.querySelector("#btn-send-email");
+      const btnEmailConfirm = document.querySelector("#btn-email-confirm");
+      const emailConfirm = document.querySelector("#email-confirm");
+      const userEmail = document.querySelector("#user-email");
+      const userEmailConfirm = document.querySelector("#user-email-confirm");
+      btnSendEmail.addEventListener("click", (e) => {
         e.preventDefault();
-        fetch("../member/id-check?userId=" + userId.value)
+        if (userEmail.value.trim() === "") {
+          alert("이메일을 확인해주세요.");
+          return;
+        }
+        const sendData = { email: userEmail.value };
+        console.log(sendData);
+        fetch("../mail/confirm", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(sendData),
+        })
           .then((response) => response.json())
           .then((json) => {
-            console.log(json); //{count:0}
-            if (json.count > 0) {
-              alert("쓸 수 없는 아이디입니다.");
-            } else {
-              let used = confirm("쓸 수 있는 아이디입니다. 사용하시겠습니까?");
-              if (!used) {
-                userId.value = "";
-                userId.focus();
+            alert("인증메일이 발송되었습니다.");
+            btnEmailConfirm.addEventListener("click", (e) => {
+              e.preventDefault();
+              if (userEmailConfirm.value.trim() === json.confirmNumber) {
+                alert("인증되었습니다.");
               }
-            }
+            });
+            console.log(json);
           });
+        emailConfirm.classList.remove("blind");
       });
     </script>
   </body>
