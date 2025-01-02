@@ -7,11 +7,13 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jjang051.comment.dto.CustomUserDetails;
 import com.jjang051.comment.dto.MemberDto;
 import com.jjang051.comment.entity.Board;
 import com.jjang051.comment.entity.Member;
+import com.jjang051.comment.service.MailService;
 import com.jjang051.comment.service.MemberService;
 
 import jakarta.validation.Valid;
@@ -31,6 +33,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class MemberController {
 
   private final MemberService memberService;
+  private final MailService mailService;
   private String prefix = "/member";
   
   @GetMapping("/signin")
@@ -49,11 +52,13 @@ public class MemberController {
   @GetMapping("/login")
   public String login(Model model) {
       //model.addAttribute("memberDto", new MemberDto());
+      mailService.sendMail();
       return prefix+"/login";
   }
 
   @GetMapping("/info")
   public String info() {
+       mailService.sendMail();
       return prefix+"/info";
   }
   @GetMapping("/modify")
@@ -79,6 +84,20 @@ public class MemberController {
     
     model.addAttribute("boardList", boardList);
     return prefix+"/board";
+  }
+
+
+  @GetMapping("/list")
+  @ResponseBody
+  public String list() {
+    List<Member> members = memberService.findAll();
+    for (Member member : members) {
+        System.out.println(member.getUserName());
+        for (Board board : member.getBoardList()) {
+            System.out.println(board.getTitle());
+        }
+    }
+    return "dsads";
   }
 
   

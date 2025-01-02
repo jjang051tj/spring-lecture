@@ -76,4 +76,8 @@ public class MemberService {
   public List<Board> findAllBoards(String userId) {
     return memberRepository.findAllBoards(userId);
   }
+
+  public List<Member> findAll() {
+    return memberRepository.findAll();
+  }
 }
