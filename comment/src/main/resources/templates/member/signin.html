@@ -154,18 +154,20 @@
             />
           </div>
           <div class="mt-5">
-            <button class="btn btn-primary">SIGN UP</button>
+            <button class="btn btn-primary" id="btn-sign-up">SIGN UP</button>
           </div>
         </form>
       </main>
       <footer th:replace="~{fragments/footer}"></footer>
     </div>
     <script>
+      let isAuth = false;
       const btnSendEmail = document.querySelector("#btn-send-email");
       const btnEmailConfirm = document.querySelector("#btn-email-confirm");
       const emailConfirm = document.querySelector("#email-confirm");
       const userEmail = document.querySelector("#user-email");
       const userEmailConfirm = document.querySelector("#user-email-confirm");
+      const btnSignUp = document.querySelector("#btn-sign-up");
       btnSendEmail.addEventListener("click", (e) => {
         e.preventDefault();
         if (userEmail.value.trim() === "") {
@@ -188,11 +190,18 @@
               e.preventDefault();
               if (userEmailConfirm.value.trim() === json.confirmNumber) {
                 alert("인증되었습니다.");
+                isAuth = true;
               }
             });
             console.log(json);
           });
         emailConfirm.classList.remove("blind");
+      });
+      btnSignUp.addEventListener("click", (e) => {
+        if (!isAuth) {
+          e.preventDefault();
+          alert("이메일 인증이 되지 않았습니다.");
+        }
       });
     </script>
   </body>
