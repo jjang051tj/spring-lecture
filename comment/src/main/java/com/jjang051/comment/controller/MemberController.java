@@ -52,7 +52,7 @@ public class MemberController {
   @GetMapping("/login")
   public String login(Model model) {
       //model.addAttribute("memberDto", new MemberDto());
-      mailService.sendMail();
+      //mailService.sendMail();
       return prefix+"/login";
   }
 

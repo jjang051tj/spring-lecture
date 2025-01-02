@@ -29,7 +29,7 @@ public class SecurityConfig {
   public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
     httpSecurity.authorizeHttpRequests(
       (auth)->auth
-      .requestMatchers("/","/member/signin","/member/login","/board/list","/board/view/**","/css/**","/images/**","/js/**")
+      .requestMatchers("/","/member/signin","/member/login","/board/list","/mail/find-password","/board/view/**","/css/**","/images/**","/js/**")
       .permitAll()
       .anyRequest()
       .authenticated()

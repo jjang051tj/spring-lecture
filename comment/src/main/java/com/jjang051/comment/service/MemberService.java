@@ -80,4 +80,27 @@ public class MemberService {
   public List<Member> findAll() {
     return memberRepository.findAll();
   }
+
+  public void updatePassword(String palinPassword, String userId) {
+    String updatedPasword = palinPassword;
+    Optional<Member> optionalMember = memberRepository.findByUserId(userId);
+    Member findedMember = null;
+    if(optionalMember.isPresent()) {
+      findedMember = optionalMember.get();
+      Member member = Member.builder()
+                      .id(findedMember.getId())
+                      .addr01(findedMember.getAddr01())
+                      .addr02(findedMember.getAddr02())
+                      .role(findedMember.getRole())
+                      .zipcode(findedMember.getZipcode())
+                      .userEmail(findedMember.getUserEmail())
+                      .tel(findedMember.getTel())
+                      .userName(findedMember.getUserName())
+                      .regDate(findedMember.getRegDate())
+                      .userId(findedMember.getUserId())
+                      .password(updatedPasword)
+                      .build();
+      memberRepository.save(member);
+    }
+  }
 }
