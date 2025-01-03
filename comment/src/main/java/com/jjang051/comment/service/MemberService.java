@@ -82,6 +82,7 @@ public class MemberService {
   }
 
   public void updatePassword(String palinPassword, String userId) {
+    //125623
     String updatedPasword = bCryptPasswordEncoder.encode(palinPassword);
     Optional<Member> optionalMember = memberRepository.findByUserId(userId);
     Member findedMember = null;

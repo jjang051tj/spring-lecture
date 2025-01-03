@@ -37,7 +37,7 @@ public class MailController {
 
 
   @PostMapping("/find-password")
-  public String findPasswordProcess(@RequestParam(name="userEmail") String userEmail) {
+  public String findPassword(@RequestParam(name="userEmail") String userEmail) {
       mailService.sendMail(userEmail);
       return "redirect:/member/login";
   }

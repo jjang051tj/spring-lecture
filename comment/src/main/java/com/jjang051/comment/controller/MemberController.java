@@ -34,6 +34,7 @@ public class MemberController {
 
   private final MemberService memberService;
   private final MailService mailService;
+
   private String prefix = "/member";
   
   @GetMapping("/signin")
