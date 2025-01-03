@@ -12,16 +12,22 @@ import org.springframework.security.web.authentication.AuthenticationFailureHand
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.stereotype.Component;
 
+import com.jjang051.comment.service.OAuth2DetailsService;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.RequiredArgsConstructor;
 
 @Configuration
 @EnableWebSecurity
+@RequiredArgsConstructor
 public class SecurityConfig {
 
   @Autowired
   private CustomLoginFailure customLoginFailure;
+  
+  private final OAuth2DetailsService oAuth2DetailsService;
 
 
   //스프링 부트 3 람다식으로 변경
@@ -54,6 +60,13 @@ public class SecurityConfig {
         .invalidateHttpSession(true)
       )
       .csrf((auth)->auth.disable());  //front에서 토큰 가지고 접근  jwt  리액트 vue에서 접근할때
+      
+      //소셜로그인
+    httpSecurity.oauth2Login((auth)->auth
+      .loginPage("/member/login")
+      .defaultSuccessUrl("/board/list",true)
+      .userInfoEndpoint(userInfo->userInfo.userService(oAuth2DetailsService))
+    );
       return httpSecurity.build();
   }
 }
