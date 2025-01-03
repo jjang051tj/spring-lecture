@@ -5,5 +5,5 @@ public interface SocialUserInfo {
   public String getName();
   public String getProvider();
   public String getProviderId();
-
 }
+

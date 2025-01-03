@@ -13,19 +13,20 @@ import com.jjang051.comment.entity.Member;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
-//@RequiredArgsConstructor
+
 @Getter
 public class CustomUserDetails implements UserDetails,OAuth2User {
 
   private final Member loggedMember;
   private Map<String,Object> attributes;
+  
   public CustomUserDetails(Member loggedMember) {
     this.loggedMember = loggedMember;
-  }
-  public CustomUserDetails(Member loggedMember,Map<String, Object> attributes) {
+  }  
+  public CustomUserDetails(Member loggedMember, Map<String,Object> attributes) {
     this.loggedMember = loggedMember;
     this.attributes = attributes;
-  }
+  }  
   
 
   @Override
