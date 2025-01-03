@@ -13,6 +13,7 @@ import com.jjang051.comment.dto.CustomUserDetails;
 import com.jjang051.comment.entity.Member;
 import com.jjang051.comment.repository.MemberRepository;
 import com.jjang051.comment.social.GoogleUserInfo;
+import com.jjang051.comment.social.KakaoUserInfo;
 import com.jjang051.comment.social.SocialUserInfo;
 
 import java.time.LocalDateTime;
@@ -28,6 +29,7 @@ public class OAuth2DetailsService extends DefaultOAuth2UserService {
     //  변수들이 들어온다.
     private final MemberRepository memberRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
+
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
 
 
@@ -41,6 +43,8 @@ public class OAuth2DetailsService extends DefaultOAuth2UserService {
         SocialUserInfo socialUserInfo = null;
         if(provider.equals("google")) {
           socialUserInfo = new GoogleUserInfo(ouath2UserInfo);
+        } else if(provider.equals("kakao")) {
+          socialUserInfo = new KakaoUserInfo(ouath2UserInfo); 
         }
         Member returnMember = null;
         Optional<Member> findMember =

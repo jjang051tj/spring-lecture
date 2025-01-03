@@ -54,7 +54,7 @@ public class CommentController {
   public Map<String, Object> writeAjax(@PathVariable("id") Long id, @RequestBody Comment comment) {
     log.info("comment==={}",comment.getContent());
     Board board = boardService.getView(id);
-    Comment insertComment = commentService.write(comment.getContent(),board);
+    Comment insertComment = commentService.write(comment.getContent(),board, null);
     Map<String, Object> resultMap =  new HashMap<>();
     resultMap.put("isInsert", "ok");
     resultMap.put("insertComment", insertComment);

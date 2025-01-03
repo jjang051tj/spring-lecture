@@ -11,13 +11,13 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 import com.jjang051.comment.entity.Member;
 
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 
 
 @Getter
 public class CustomUserDetails implements UserDetails,OAuth2User {
 
   private final Member loggedMember;
+  
   private Map<String,Object> attributes;
   
   public CustomUserDetails(Member loggedMember) {
