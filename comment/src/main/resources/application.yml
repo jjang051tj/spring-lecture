@@ -3,6 +3,9 @@ server:
 spring:
   application:
     name: comment
+  profiles:
+    include:
+      - oauth
 
   output:
     ansi:
@@ -34,8 +37,8 @@ spring:
   mail:
     host: smtp.naver.com
     port: 465
-    username:
-    password:
+    username: jjang051hta@naver.com
+    password: asdf1234!!
     properties:
       debug: true
       mail:
