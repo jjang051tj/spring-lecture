@@ -7,16 +7,16 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class GoogleUserInfo implements SocialUserInfo {
 
-  private final Map<String,Object> attributes;
+  private final Map<String,Object> attribute;
 
   @Override
   public String getEmail() {
-    return "jjang051@hanmail.net";
+    return (String) attribute.get("email");
   }
 
   @Override
   public String getName() {
-    return "장성호";
+    return (String) attribute.get("name");
   }
 
   @Override
@@ -26,7 +26,7 @@ public class GoogleUserInfo implements SocialUserInfo {
 
   @Override
   public String getProviderId() {
-    return null;
+    return getProvider()+"_"+attribute.get("sub");
   }
 
 }
